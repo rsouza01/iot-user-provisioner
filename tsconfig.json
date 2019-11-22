@@ -7,7 +7,7 @@
     "outDir": "./build",                          
     "rootDir": "./src",
     "strict": true,         
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
