@@ -9,7 +9,7 @@
     "build:prod": "rimraf ./build; tsc",
     "tests:unit": "mocha -r ts-node/register ./test/**/*.unit.ts",
     "tests:e2e": "cucumber-js -p default",
-    "tests:coverage": "dotenv nyc npm run test"
+    "tests:coverage": "dotenv nyc npm run tests:unit"
   },
   "keywords": [],
   "author": "",
