@@ -12,8 +12,6 @@ export class UserCreateSteps {
 
   @when(/the client creates a POST request to \/user/)
   public createPost() {
-    const url = `${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}/user`;
-    this.request = superagent('POST', url);
     this.request = superagent('POST', 'localhost:8080/user');
   }
 
@@ -25,17 +23,19 @@ export class UserCreateSteps {
   @when(/attaches a generic non-JSON payload/)
   public attachGenericNonJsonPayload() {
     this.request.send('<?xml version="1.0" encoding="UTF-8" ><email>dan@danyll.com</email>');
-    this.request.set('Content-Type', 'text/xml');
+    this.request.set('content-type', 'text/xml');
   }
 
   @when(/attaches a generic malformed payload/)
   public attachGenericMalformedPayload() {
-    this.request.send('{"email": "dan@danyll.com", name: }');
-    this.request.set('Content-Type', 'application/json');
+    this.request.send('{"email": "dan@danyll.com", name: "ABC 123"}');
+    this.request.set('content-type', 'application/json');
   }
 
   @when(/sends the request/)
   public sendRequest(callback) {
+    console.log('sendRequest');
+    
     this.request.then((response) => {
       this.response = response.res;
       callback();
@@ -59,7 +59,7 @@ export class UserCreateSteps {
   @then(/the payload of the response should be a JSON object/)
   public checkPayloadContentType() {
     // Check Content-Type header 
-    const contentType = this.response.headers['Content-Type'] || this.response.headers['content-type'];
+    const contentType = this.response.headers['content-type'] || this.response.headers['content-type'];
     if (!contentType || !contentType.includes('application/json')) {
       throw new Error('Response not of Content-Type application/json');
     }
@@ -73,6 +73,7 @@ export class UserCreateSteps {
 
   @given(/contains a message property which says "([^"]*)"/)
   public thenPayloadMessageShouldBe(message: string) {
+    assert.equal(this.responsePayload.message, 'Payload should not be empty');
   }
 
   // @then(/contains a message property which says "Payload should not be empty"/)

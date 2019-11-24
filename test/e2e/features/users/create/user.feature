@@ -2,10 +2,10 @@ Feature: Create User
   Clients should be able to send a request to our API in order to create a user.
   Our API should also validate the structure of the payload and respond with an error if it is invalid.
 
-  Scenario: Empty Payload
+  Scenario: Empty Payload @only
     If the client sends a POST request to /user with a unsupported payload, it should receive a response with a 4xx status code.
 
-    When the client creates a POST request to /users
+    When the client creates a POST request to /user
     And attaches a generic empty payload
     And sends the request
     Then our API should respond with a 400 HTTP status code
@@ -15,7 +15,7 @@ Feature: Create User
   Scenario: Payload using Unsupported Media Type
     If the client sends a POST request to /users with an payload that is not JSON, it should receive a response with a 415 Unsupported Media Type HTTP status code.
 
-    When the client creates a POST request to /users
+    When the client creates a POST request to /user
     And attaches a generic non-JSON payload
     And sends the request
     Then our API should respond with a 415 HTTP status code
@@ -25,7 +25,7 @@ Feature: Create User
   Scenario: Malformed JSON Payload
     If the client sends a POST request to /users with an payload that is malformed, it should receive a response with a 400 Unsupported Media Type HTTP status code.
 
-    When the client creates a POST request to /users
+    When the client creates a POST request to /user
     And attaches a generic malformed payload
     And sends the request
     Then our API should respond with a 400 HTTP status code
