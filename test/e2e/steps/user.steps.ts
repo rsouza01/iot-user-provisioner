@@ -3,8 +3,6 @@ import assert from 'assert';
 
 import superagent from 'superagent';
 
-/**PAGE 153 */
-
 @binding()
 export class UserCreateSteps {
 
@@ -14,16 +12,26 @@ export class UserCreateSteps {
 
   @when(/the client creates a POST request to \/user/)
   public createPost() {
-    const url =  `${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}/user`;
-    console.log('URL: ' + url);
-    
-    this.request = superagent('POST',url);
+    const url = `${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}/user`;
+    this.request = superagent('POST', url);
     this.request = superagent('POST', 'localhost:8080/user');
   }
 
   @when(/attaches a generic empty payload/)
   public attachGenericPayload() {
     return undefined;
+  }
+
+  @when(/attaches a generic non-JSON payload/)
+  public attachGenericNonJsonPayload() {
+    this.request.send('<?xml version="1.0" encoding="UTF-8" ><email>dan@danyll.com</email>');
+    this.request.set('Content-Type', 'text/xml');
+  }
+
+  @when(/attaches a generic malformed payload/)
+  public attachGenericMalformedPayload() {
+    this.request.send('{"email": "dan@danyll.com", name: }');
+    this.request.set('Content-Type', 'application/json');
   }
 
   @when(/sends the request/)
@@ -39,8 +47,13 @@ export class UserCreateSteps {
   }
 
   @then(/our API should respond with a 400 HTTP status code/)
-  public checkHTTPResponse() {
+  public checkHTTPResponse400() {
     assert.equal(this.response.statusCode, 400);
+  }
+
+  @then(/our API should respond with a 415 HTTP status code/)
+  public checkHTTPResponse415() {
+    assert.equal(this.response.statusCode, 415);
   }
 
   @then(/the payload of the response should be a JSON object/)
@@ -58,11 +71,19 @@ export class UserCreateSteps {
     }
   };
 
-  @then(/contains a message property which says "Payload should not be empty"/)
-  public checkPayloadMessage() {
-    if (this.responsePayload.message !== 'Payload should not be empty') {
-      throw new Error();
-    }
+  @given(/contains a message property which says "([^"]*)"/)
+  public thenPayloadMessageShouldBe(message: string) {
   }
 
+  // @then(/contains a message property which says "Payload should not be empty"/)
+  // public checkPayloadMessage() {
+  //   if (this.responsePayload.message !== 'Payload should not be empty') {
+  //     throw new Error();
+  //   }
+  // }
+
+  // @then(/contains a message property which says "Payload should be in JSON format"/)
+  // public checkPayloadJsonFormatMessage() {
+  //   assert.equal(this.responsePayload.message, 'Payload should be in JSON format');
+  // }
 }
