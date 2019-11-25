@@ -23,7 +23,7 @@ export class UserCreateSteps {
   @when(/attaches a generic non-JSON payload/)
   public attachGenericNonJsonPayload() {
     this.request.send('<?xml version="1.0" encoding="UTF-8" ><email>dan@danyll.com</email>');
-    this.request.set('content-type', 'text/xml');
+    this.request.set('Content-Type', 'text/xml');
   }
 
   @when(/attaches a generic malformed payload/)

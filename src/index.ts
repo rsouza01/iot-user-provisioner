@@ -12,6 +12,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors());
 
+
 handlers.registerRoutes(app);
 
 if (require.main === module) {
