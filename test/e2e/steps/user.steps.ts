@@ -10,51 +10,38 @@ export class UserCreateSteps {
   private responsePayload: any;
   private request: any;
 
-  @when(/the client creates a POST request to \/user/)
-  public createPost() {
-    this.request = superagent('POST', 'localhost:8080/user');
+  @when(/the client creates a (GET|POST|PATCH|PUT|DELETE|OPTIONS|HEAD) request to ([/\w-:.]+)$/)
+  public createPost(method, path) {
+    this.request = superagent(method, `http://localhost:8080${path}`);
   }
 
-  @when(/attaches a generic empty payload/)
-  public attachGenericPayload() {
-    return undefined;
-  }
 
-  @when(/attaches a generic non-JSON payload/)
-  public attachGenericNonJsonPayload() {
-    this.request.send('<?xml version="1.0" encoding="UTF-8" ><email>dan@danyll.com</email>');
-    this.request.set('Content-Type', 'text/xml');
-  }
+  @when(/^attaches a generic (.+) payload$/)
+  public attachGenericPayload(payloadType: string) {
 
-  @when(/attaches a generic malformed payload/)
-  public attachGenericMalformedPayload() {
-    this.request.send('{"email": "dan@danyll.com", name: "ABC 123"}');
-    this.request.set('content-type', 'application/json');
-  }
+    switch (payloadType) {
+      case 'malformed': this.request.send('{"email": "dan@danyll.com", name: }').set('Content-Type', 'application/json'); break;
+      case 'non-JSON': this.request.send('<?xml version="1.0" encoding="UTF-8" ?><email>dan@danyll.com</email>').set('Content-Type', 'text/xml'); break;
+      case 'empty': default:
+    }
+  };
+
 
   @when(/sends the request/)
   public sendRequest(callback) {
-    console.log('sendRequest');
-    
     this.request.then((response) => {
-      this.response = response.res;
-      callback();
+      this.response = response.res; callback();
     })
-      .catch((errResponse) => {
-        this.response = errResponse.response;
-        callback();
+      .catch((error) => {
+        this.response = error.response; callback();
       });
   }
 
-  @then(/our API should respond with a 400 HTTP status code/)
-  public checkHTTPResponse400() {
-    assert.equal(this.response.statusCode, 400);
+  @then(/our API should respond with a ([1-5]\d{2}) HTTP status code/)
+  public checkHTTPResponse4XX(statusCode: number) {
+    assert.equal(this.response.statusCode, statusCode);
   }
 
-  @then(/our API should respond with a 415 HTTP status code/)
-  public checkHTTPResponse415() {
-    assert.equal(this.response.statusCode, 415);
-  }
 
   @then(/the payload of the response should be a JSON object/)
   public checkPayloadContentType() {
@@ -70,21 +57,8 @@ export class UserCreateSteps {
       throw new Error('Response not a valid JSON object');
     }
   };
-
-  @given(/contains a message property which says "([^"]*)"/)
+  @given(/contains a message property which says "(?:"|')(.*)(?:"|')"/)
   public thenPayloadMessageShouldBe(message: string) {
-    assert.equal(this.responsePayload.message, 'Payload should not be empty');
+    assert.equal(this.responsePayload.message, message);
   }
-
-  // @then(/contains a message property which says "Payload should not be empty"/)
-  // public checkPayloadMessage() {
-  //   if (this.responsePayload.message !== 'Payload should not be empty') {
-  //     throw new Error();
-  //   }
-  // }
-
-  // @then(/contains a message property which says "Payload should be in JSON format"/)
-  // public checkPayloadJsonFormatMessage() {
-  //   assert.equal(this.responsePayload.message, 'Payload should be in JSON format');
-  // }
 }

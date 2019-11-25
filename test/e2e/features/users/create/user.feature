@@ -2,7 +2,7 @@ Feature: Create User
   Clients should be able to send a request to our API in order to create a user.
   Our API should also validate the structure of the payload and respond with an error if it is invalid.
 
-  # Scenario: Empty Payload @only
+  # Scenario: Empty Payload
   #   If the client sends a POST request to /user with a unsupported payload, it should receive a response with a 4xx status code.
 
   #   When the client creates a POST request to /user
@@ -12,15 +12,15 @@ Feature: Create User
   #   And the payload of the response should be a JSON object
   #   And contains a message property which says "Payload should not be empty"
 
-  Scenario: Payload using Unsupported Media Type
-    If the client sends a POST request to /users with an payload that is not JSON, it should receive a response with a 415 Unsupported Media Type HTTP status code.
+  # Scenario: Payload using Unsupported Media Type
+  #   If the client sends a POST request to /users with an payload that is not JSON, it should receive a response with a 415 Unsupported Media Type HTTP status code.
 
-    When the client creates a POST request to /user
-    And attaches a generic non-JSON payload
-    And sends the request
-    Then our API should respond with a 415 HTTP status code
-    And the payload of the response should be a JSON object
-    And contains a message property which says "The \"Content-Type\" header must always be \"application/json\""
+  #   When the client creates a POST request to /user
+  #   And attaches a generic non-JSON payload
+  #   And sends the request
+  #   Then our API should respond with a 415 HTTP status code
+  #   And the payload of the response should be a JSON object
+  #   And contains a message property which says "The \"Content-Type\" header must always be \"application/json\""
 
   # Scenario: Malformed JSON Payload
   #   If the client sends a POST request to /users with an payload that is malformed, it should receive a response with a 400 Unsupported Media Type HTTP status code.
@@ -31,3 +31,19 @@ Feature: Create User
   #   Then our API should respond with a 400 HTTP status code
   #   And the payload of the response should be a JSON object
   #   And contains a message property which says "Payload should be in JSON format"
+
+  Scenario Outline: Bad client request
+    If the client sends a POST request to /users with an payload that is empty/malformed, it should receive a response with a 4XX Bad Request Type HTTP status code.
+
+    When the client creates a POST request to /user
+    And attaches a generic <payloadType> payload
+    And sends the request
+    Then our API should respond with a <statudCode> HTTP status code
+    And the payload of the response should be a JSON object
+    And contains a message property which says <message>
+
+    Examples:
+      | payloadType | statusCode | message                                                       |
+      | empty       | 400        | "Payload should not be empty"                                 |
+      | non-JSON    | 415        | 'The "Content-Type" header must always be "application/json"' |
+      | malformed   | 400        | "Payload should be in JSON format"                            |
