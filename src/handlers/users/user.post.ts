@@ -8,53 +8,19 @@ export async function main(req: Request, res: Response) {
   //Not json - 415
   //Malformed JSON - 400
 
-  console.log('>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<');
-  console.log('HEADERS: ', req.headers);
-  console.log('BODY: ', req.body);
-
-  console.log('content-length: ', req.headers['content-lenght']);
-  console.log('content-type: ', req.headers['content-type']);
-
-  if (!req.headers || !req.headers['content-type'] || req.headers['content-type'] !== 'application/json') {
-    res.writeHead(HttpStatus.UNSUPPORTED_MEDIA_TYPE, { 'content-type': 'application/json' });
-    res.end(
-      JSON.stringify(
-        {
-          message: 'The \"content-type\" header must always be \"application/json\"',
-        }
-      ));
+  if (req.headers['content-length'] === '0') {
+    res.status(400);
+    res.set('Content-Type', 'application/json');
+    res.json({ message: 'Payload should not be empty', });
     return;
   }
-
-
-  if (!req.headers || !req.headers['content-lenght'] || req.headers['content-lenght'] === '0') {
-    res.writeHead(HttpStatus.BAD_REQUEST, { 'content-Type': 'application/json' });
-    res.end(
-      JSON.stringify(
-        {
-          message: 'Payload should not be empty',
-        }
-      ));
+  if (req.headers['content-type'] !== 'application/json') {
+    res.status(415);
+    res.set('Content-Type', 'application/json');
+    res.json({ message: 'The "Content-Type" header must always be "application/json"', });
     return;
   }
-
-  if (!(req.headers && req.headers['content-type'] && req.headers['content-type'] === 'application/json')) {
-    //res.writeHead(HttpStatus.BAD_REQUEST, { 'content-Type': 'application/json' });
-    res.writeHead(502, { 'content-Type': 'application/json' });
-    res.end(
-      JSON.stringify(
-        {
-          message: 'Payload should be in JSON format',
-        }
-      ));
-    return;
-  }
-
-
-
-
-  res.writeHead(201, { 'content-Type': 'application/json' })
-  .end({});
-  return;
-
+  res.status(400);
+  res.set('Content-Type', 'application/json');
+  res.json({ message: 'Payload should be in JSON format', });
 }

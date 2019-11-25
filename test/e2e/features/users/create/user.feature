@@ -38,12 +38,12 @@ Feature: Create User
     When the client creates a POST request to /user
     And attaches a generic <payloadType> payload
     And sends the request
-    Then our API should respond with a <statudCode> HTTP status code
+    Then our API should respond with a <statusCode> HTTP status code
     And the payload of the response should be a JSON object
     And contains a message property which says <message>
 
     Examples:
-      | payloadType | statusCode | message                                                       |
-      | empty       | 400        | "Payload should not be empty"                                 |
-      | non-JSON    | 415        | 'The "Content-Type" header must always be "application/json"' |
-      | malformed   | 400        | "Payload should be in JSON format"                            |
+      | payloadType | statusCode | message                                                            |
+      | empty       | 400        | "Payload should not be empty"                                      |
+      # | non-JSON    | 415        | "The \"Content-Type\" header must always be \"application/json\""  |
+      # | malformed   | 400        | "Payload should be in JSON format"                                 |

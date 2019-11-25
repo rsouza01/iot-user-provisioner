@@ -57,7 +57,9 @@ export class UserCreateSteps {
       throw new Error('Response not a valid JSON object');
     }
   };
-  @given(/contains a message property which says "(?:"|')(.*)(?:"|')"/)
+  
+  //@then(/contains a message property which says "(?:"|')(.*)(?:"|')$"/)
+  @then(/contains a message property which says "([^"]*)"/)
   public thenPayloadMessageShouldBe(message: string) {
     assert.equal(this.responsePayload.message, message);
   }
