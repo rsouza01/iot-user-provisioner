@@ -58,7 +58,6 @@ export class UserCreateSteps {
     }
   };
   
-  //@then(/contains a message property which says "(?:"|')(.*)(?:"|')$"/)
   @then(/contains a message property which says "([^"]*)"/)
   public thenPayloadMessageShouldBe(message: string) {
     assert.equal(this.responsePayload.message, message);

@@ -45,5 +45,5 @@ Feature: Create User
     Examples:
       | payloadType | statusCode | message                                                            |
       | empty       | 400        | "Payload should not be empty"                                      |
-      # | non-JSON    | 415        | "The \"Content-Type\" header must always be \"application/json\""  |
-      # | malformed   | 400        | "Payload should be in JSON format"                                 |
+      | non-JSON    | 415        | 'The "Content-Type" header must always be "application/json"'      |
+      | malformed   | 400        | "Payload should be in JSON format"                                 |

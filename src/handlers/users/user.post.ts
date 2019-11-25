@@ -20,6 +20,7 @@ export async function main(req: Request, res: Response) {
     res.json({ message: 'The "Content-Type" header must always be "application/json"', });
     return;
   }
+  
   res.status(400);
   res.set('Content-Type', 'application/json');
   res.json({ message: 'Payload should be in JSON format', });
