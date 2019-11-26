@@ -8,6 +8,7 @@ export async function main(req: Request, res: Response) {
   //Not json - 415
   //Malformed JSON - 400
 
+
   if (req.headers['content-length'] === '0') {
     res.status(400);
     res.set('Content-Type', 'application/json');

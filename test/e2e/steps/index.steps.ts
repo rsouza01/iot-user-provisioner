@@ -36,7 +36,7 @@ export class UserCreateSteps {
   }
 
   @when(/^without a (?:"|')([\w-]+)(?:"|') header set$/)
-  public checkRequestHeader(headerName) {
+  public checkRequestHeader(headerName: string) {
     this.request.unset(headerName);
   }
 
@@ -49,6 +49,7 @@ export class UserCreateSteps {
   public checkPayloadContentType() {
     // Check Content-Type header 
     const contentType = this.response.headers['Content-Type'] || this.response.headers['content-type'];
+
     if (!contentType || !contentType.includes('application/json')) {
       throw new Error('Response not of Content-Type application/json');
     }
