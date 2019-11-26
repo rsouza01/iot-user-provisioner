@@ -15,7 +15,6 @@ export class UserCreateSteps {
     this.request = superagent(method, `http://localhost:8080${path}`);
   }
 
-
   @when(/^attaches a generic (.+) payload$/)
   public attachGenericPayload(payloadType: string) {
 
@@ -26,8 +25,7 @@ export class UserCreateSteps {
     }
   };
 
-
-  @when(/sends the request/)
+  @when(/^sends the request$/)
   public sendRequest(callback) {
     this.request.then((response) => {
       this.response = response.res; callback();
@@ -37,13 +35,12 @@ export class UserCreateSteps {
       });
   }
 
-  @then(/our API should respond with a ([1-5]\d{2}) HTTP status code/)
+  @then(/^our API should respond with a ([1-5]\d{2}) HTTP status code$/)
   public checkHTTPResponse4XX(statusCode: number) {
     assert.equal(this.response.statusCode, statusCode);
   }
 
-
-  @then(/the payload of the response should be a JSON object/)
+  @then(/^the payload of the response should be a JSON object$/)
   public checkPayloadContentType() {
     // Check Content-Type header 
     const contentType = this.response.headers['content-type'] || this.response.headers['content-type'];
@@ -57,8 +54,8 @@ export class UserCreateSteps {
       throw new Error('Response not a valid JSON object');
     }
   };
-  
-  @then(/contains a message property which says "([^"]*)"/)
+
+  @then(/^contains a message property which says (?:"|')(.*)(?:"|')$/)
   public thenPayloadMessageShouldBe(message: string) {
     assert.equal(this.responsePayload.message, message);
   }
