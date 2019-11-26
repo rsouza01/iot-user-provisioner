@@ -35,6 +35,11 @@ export class UserCreateSteps {
       });
   }
 
+  @when(/^without a (?:"|')([\w-]+)(?:"|') header set$/)
+  public checkRequestHeader(headerName) {
+    this.request.unset(headerName);
+  }
+
   @then(/^our API should respond with a ([1-5]\d{2}) HTTP status code$/)
   public checkHTTPResponse4XX(statusCode: number) {
     assert.equal(this.response.statusCode, statusCode);
@@ -43,7 +48,7 @@ export class UserCreateSteps {
   @then(/^the payload of the response should be a JSON object$/)
   public checkPayloadContentType() {
     // Check Content-Type header 
-    const contentType = this.response.headers['content-type'] || this.response.headers['content-type'];
+    const contentType = this.response.headers['Content-Type'] || this.response.headers['content-type'];
     if (!contentType || !contentType.includes('application/json')) {
       throw new Error('Response not of Content-Type application/json');
     }
