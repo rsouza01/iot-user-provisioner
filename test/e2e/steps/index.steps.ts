@@ -3,12 +3,17 @@ import assert from 'assert';
 
 import superagent from 'superagent';
 
+import { getValidPayload, convertStringToArray } from './utils';
+
+
 @binding()
 export class UserCreateSteps {
 
   private response: any;
   private responsePayload: any;
   private request: any;
+
+  private requestPayload: any;
 
   @when(/the client creates a (GET|POST|PATCH|PUT|DELETE|OPTIONS|HEAD) request to ([/\w-:.]+)$/)
   public createPost(method, path) {
@@ -67,16 +72,13 @@ export class UserCreateSteps {
 
   @when(/^attaches an? (.+) payload where the ([a-zA-Z0-9, ]+) fields? (?:is|are) exactly (.+)$/)
   public attachPayloadEmailField(payloadType: string, fields, value) {
-    const payload = {
-      email: 'e@ma.il',
-      password: 'password',
-    };
-    const fieldsToModify = fields.split(',').map(s => s.trim()).filter(s => s !== '');
+    this.requestPayload = getValidPayload(payloadType);
+    const fieldsToModify = convertStringToArray(fields);
     fieldsToModify.forEach((field) => {
-      payload[field] = value;
+      this.requestPayload[field] = value;
     });
     this.request
-      .send(JSON.stringify(payload))
+      .send(JSON.stringify(this.requestPayload))
       .set('Content-Type', 'application/json');
   };
 
