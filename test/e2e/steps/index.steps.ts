@@ -42,7 +42,7 @@ export class UserCreateSteps {
 
 
   @when(/^attaches an? (.+) payload where the ([a-zA-Z0-9, ]+) fields? (?:is|are)(\s+not)? a ([a-zA-Z]+)$/)
-  public attachPayloadWrongTypeField(payloadType:string, fields, invert, type) {
+  public attachPayloadWrongTypeField(payloadType: string, fields, invert, type) {
     const payload = {
       email: 'e@ma.il',
       password: 'password',
@@ -64,44 +64,60 @@ export class UserCreateSteps {
       .set('Content-Type', 'application/json');
   }
 
-@when(/^attaches an? (.+) payload which is missing the ([a-zA-Z0-9, ]+) fields?$/)
-public attachPayload(payloadType, missingFields) {
-  const payload = {
-    email: 'e@ma.il',
-    password: 'password',
+
+  @when(/^attaches an? (.+) payload where the ([a-zA-Z0-9, ]+) fields? (?:is|are) exactly (.+)$/)
+  public attachPayloadEmailField(payloadType: string, fields, value) {
+    const payload = {
+      email: 'e@ma.il',
+      password: 'password',
+    };
+    const fieldsToModify = fields.split(',').map(s => s.trim()).filter(s => s !== '');
+    fieldsToModify.forEach((field) => {
+      payload[field] = value;
+    });
+    this.request
+      .send(JSON.stringify(payload))
+      .set('Content-Type', 'application/json');
   };
-  const fieldsToDelete = missingFields.split(',').map(s => s.trim()).filter(s => s !== '');
 
-  fieldsToDelete.forEach(field => delete payload[field]);
+  @when(/^attaches an? (.+) payload which is missing the ([a-zA-Z0-9, ]+) fields?$/)
+  public attachPayload(payloadType, missingFields) {
+    const payload = {
+      email: 'e@ma.il',
+      password: 'password',
+    };
+    const fieldsToDelete = missingFields.split(',').map(s => s.trim()).filter(s => s !== '');
 
-  this.request
-    .send(JSON.stringify(payload))
-    .set('Content-Type', 'application/json');
-}
+    fieldsToDelete.forEach(field => delete payload[field]);
 
-@then(/^our API should respond with a ([1-5]\d{2}) HTTP status code$/)
-public checkHTTPResponse4XX(statusCode: number) {
-  assert.equal(this.response.statusCode, statusCode);
-}
-
-@then(/^the payload of the response should be a JSON object$/)
-public checkPayloadContentType() {
-  // Check Content-Type header 
-  const contentType = this.response.headers['Content-Type'] || this.response.headers['content-type'];
-
-  if (!contentType || !contentType.includes('application/json')) {
-    throw new Error('Response not of Content-Type application/json');
+    this.request
+      .send(JSON.stringify(payload))
+      .set('Content-Type', 'application/json');
   }
-  // Check it is valid JSON 
-  try {
-    this.responsePayload = JSON.parse(this.response.text);
-  } catch (e) {
-    throw new Error('Response not a valid JSON object');
-  }
-};
 
-@then(/^contains a message property which says (?:"|')(.*)(?:"|')$/)
-public thenPayloadMessageShouldBe(message: string) {
-  assert.equal(this.responsePayload.message, message);
-}
+  @then(/^our API should respond with a ([1-5]\d{2}) HTTP status code$/)
+  public checkHTTPResponse4XX(statusCode: number) {
+    assert.equal(this.response.statusCode, statusCode);
+  }
+
+  @then(/^the payload of the response should be a JSON object$/)
+  public checkPayloadContentType() {
+    // Check Content-Type header 
+    const contentType = this.response.headers['Content-Type'] || this.response.headers['content-type'];
+
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Response not of Content-Type application/json');
+    }
+    // Check it is valid JSON 
+    try {
+      this.responsePayload = JSON.parse(this.response.text);
+    } catch (e) {
+      throw new Error('Response not a valid JSON object');
+    }
+  };
+
+  @then(/^contains a message property which says (?:"|')(.*)(?:"|')$/)
+  public thenPayloadMessageShouldBe(message: string) {
+    assert.equal(this.responsePayload.message, message);
+  }
 }
