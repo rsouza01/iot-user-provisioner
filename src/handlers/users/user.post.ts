@@ -27,9 +27,12 @@ export async function main(req: Request, res: Response, next) {
     return;
   }
 
-  next();  
-  // res.status(400);
-  // res.set('Content-Type', 'application/json');
-  // res.json({ message: 'Payload should be in JSON format', });
+  if (typeof req.body.email !== 'string' || typeof req.body.password !== 'string') {
+    res.status(400);
+    res.set('Content-Type', 'application/json');
+    res.json({ message: 'The email and password fields must be of type string' });
+    return;
+  }
 
+  next();
 }
