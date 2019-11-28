@@ -20,6 +20,14 @@ export class UserCreateSteps {
     this.request = superagent(method, `http://localhost:8080${path}`);
   }
 
+  @when(/^attaches a valid (.+) payload$/)
+  public attachGenericValidPayload(payloadType: string) {
+    this.requestPayload = getValidPayload(payloadType);
+    this.request
+      .send(JSON.stringify(this.requestPayload))
+      .set('Content-Type', 'application/json');
+  }
+
   @when(/^attaches a generic (.+) payload$/)
   public attachGenericPayload(payloadType: string) {
 
@@ -56,7 +64,7 @@ export class UserCreateSteps {
         not: 10,
       },
     };
-    
+
     this.requestPayload = getValidPayload(payloadType);
     const fieldsToModify = convertStringToArray(fields);
 
@@ -98,19 +106,31 @@ export class UserCreateSteps {
     assert.equal(this.response.statusCode, statusCode);
   }
 
-  @then(/^the payload of the response should be a JSON object$/)
-  public checkPayloadContentType() {
-    // Check Content-Type header 
-    const contentType = this.response.headers['Content-Type'] || this.response.headers['content-type'];
-
-    if (!contentType || !contentType.includes('application/json')) {
-      throw new Error('Response not of Content-Type application/json');
-    }
-    // Check it is valid JSON 
-    try {
-      this.responsePayload = JSON.parse(this.response.text);
-    } catch (e) {
-      throw new Error('Response not a valid JSON object');
+  @then(/^the payload of the response should be an? ([a-zA-Z0-9, ]+)$/)
+  public checkPayloadContentType(payloadType: string) {
+    const contentType = this.response.headers['Content-Type'] ||
+      this.response.headers['content-type'];
+    if (payloadType === 'JSON object') {
+      // Check Content-Type header
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Response not of Content-Type application / json');
+      }
+      // Check it is valid JSON
+      try {
+        this.responsePayload = JSON.parse(this.response.text);
+      } catch (e) {
+        throw new Error('Response not a valid JSON object');
+      }
+    } else if (payloadType === 'string') {
+      // Check Content-Type header
+      if (!contentType || !contentType.includes('text/plain')) {
+        throw new Error('Response not of Content-Type text/plain');
+      }
+      // Check it is a string
+      this.responsePayload = this.response.text;
+      if (typeof this.responsePayload !== 'string') {
+        throw new Error('Response not a string');
+      }
     }
   };
 
