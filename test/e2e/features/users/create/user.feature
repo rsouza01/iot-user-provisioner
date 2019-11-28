@@ -2,6 +2,14 @@ Feature: Create User
   Clients should be able to send a request to our API in order to create a user.
   Our API should also validate the structure of the payload and respond with an error if it is invalid.
 
+  Scenario: Minimal Valid User
+    When the client creates a POST request to /user
+    And attaches a valid Create User payload
+    And sends the request
+    Then our API should respond with a 201 HTTP status code
+    And the payload of the response should be a string
+    And the payload object should be added to the database, grouped under the "user" type
+
   Scenario Outline: Bad client request
     If the client sends a POST request to /user with an payload that is empty/malformed, it should receive a response with a 4XX Bad Request Type HTTP status code.
 
@@ -56,10 +64,3 @@ Feature: Create User
       | a@1.2.3.4 |
       | a,b,c@!!  |
 
-  Scenario: Minimal Valid User
-    When the client creates a POST request to /user
-    And attaches a valid Create User payload
-    And sends the request
-    Then our API should respond with a 201 HTTP status code
-    And the payload of the response should be a string
-    And the payload object should be added to the database, grouped under the "user" type

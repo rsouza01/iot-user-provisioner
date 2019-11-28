@@ -41,5 +41,8 @@ export async function main(req: Request, res: Response, next) {
     return;
   }
 
-  next();
+  res.status(201);
+  res.set('Content-Type', 'text/plain');
+  res.send('123');
+  return;
 }

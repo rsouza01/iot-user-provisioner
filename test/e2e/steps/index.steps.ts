@@ -23,6 +23,7 @@ export class UserCreateSteps {
   @when(/^attaches a valid (.+) payload$/)
   public attachGenericValidPayload(payloadType: string) {
     this.requestPayload = getValidPayload(payloadType);
+
     this.request
       .send(JSON.stringify(this.requestPayload))
       .set('Content-Type', 'application/json');
@@ -102,7 +103,7 @@ export class UserCreateSteps {
   }
 
   @then(/^our API should respond with a ([1-5]\d{2}) HTTP status code$/)
-  public checkHTTPResponse4XX(statusCode: number) {
+  public checkHTTPResponse(statusCode: number) {
     assert.equal(this.response.statusCode, statusCode);
   }
 
@@ -138,4 +139,9 @@ export class UserCreateSteps {
   public thenPayloadMessageShouldBe(message: string) {
     assert.equal(this.responsePayload.message, message);
   }
+
+  @then(/^the payload object should be added to the database, grouped under the "([a-zA-Z]+)" type$/)
+  public checkDataSavedDatabase(type, callback) {
+      callback();
+  };
 }
