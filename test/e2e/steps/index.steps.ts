@@ -14,6 +14,7 @@ export class UserCreateSteps {
   private request: any;
 
   private requestPayload: any;
+  private userType: string = '';
 
   @when(/the client creates a (GET|POST|PATCH|PUT|DELETE|OPTIONS|HEAD) request to ([/\w-:.]+)$/)
   public createPost(method, path) {
@@ -142,6 +143,11 @@ export class UserCreateSteps {
 
   @then(/^the payload object should be added to the database, grouped under the "([a-zA-Z]+)" type$/)
   public checkDataSavedDatabase(type, callback) {
-      callback();
+    this.userType = type;
+    callback();
+  };
+
+  @then(/^the newly-created user should be deleted$/)
+  public deleteCreatedUser() {
   };
 }

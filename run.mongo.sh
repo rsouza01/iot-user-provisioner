@@ -1,6 +1,3 @@
 #!/bin/sh
 
-mkdir ~/data
-sudo docker run -d -p 27017:27017 -v ~/data:/data/db mongo
-
-docker run -d -p 27017:27017 -v data:/data/db mongo
+docker run --name mongo_users_db -d -p 27017:27017 mongo --noauth --bind_ip=0.0.0.0

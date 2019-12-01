@@ -9,6 +9,8 @@ Feature: Create User
     Then our API should respond with a 201 HTTP status code
     And the payload of the response should be a string
     And the payload object should be added to the database, grouped under the "user" type
+    And the newly-created user should be deleted
+
 
   Scenario Outline: Bad client request
     If the client sends a POST request to /user with an payload that is empty/malformed, it should receive a response with a 4XX Bad Request Type HTTP status code.
