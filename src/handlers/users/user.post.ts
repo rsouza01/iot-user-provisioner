@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import * as HttpStatus from 'http-status-codes';
+import { UserMongoRepository } from '../../repository/mongoRepo';
+import User from '../../domain/user';
+
 
 
 export async function main(req: Request, res: Response, next) {
@@ -42,6 +45,16 @@ export async function main(req: Request, res: Response, next) {
   }
 
   res.status(201);
+
+  const userRepository = new UserMongoRepository();
+
+  const user = {
+    email: 'string',
+    password: 'string'
+  } as User;
+
+  userRepository.insert(user);
+
   res.set('Content-Type', 'text/plain');
   res.send('123');
   return;
