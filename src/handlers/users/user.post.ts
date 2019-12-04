@@ -24,8 +24,6 @@ export async function main(req: Request, res: Response, next) {
     return res.json({ message: 'The email field must be a valid email.' });
   }
 
-  
-
   /*
   const userRepository = new UserMongoRepository();
 
@@ -37,7 +35,6 @@ export async function main(req: Request, res: Response, next) {
   userRepository.insert(user);
   */
 
-  console.log('>>>>>>>>>>> CREATION');
   res.status(HttpStatus.CREATED);
   res.set('Content-Type', 'text/plain');
   res.send('123');
