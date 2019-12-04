@@ -15,7 +15,7 @@ const path: string = '/user';
 
 describe('User - POST Handler', () => {
 
-  it.only('Create instance', async () => {
+  it.only('Create user successfully', async () => {
 
     const request = superagent('POST', `${server}${path}`);
 
@@ -23,21 +23,16 @@ describe('User - POST Handler', () => {
 
     const payload = getValidPayload();
 
-    console.log('>>>>>>> PAYLOAD: ', payload);
-
     await request
       .send(JSON.stringify(payload))
       .set('Content-Type', 'application/json')
       .then((res) => {
-        response = res;
-
-        console.log('>>>>>>>>>>> responsePayload.statusCode: ', response ? response.statusCode : 0);
-        //console.log('>>>>>>>>>>> RESPONSE: ', response);
-        console.log('>>>>>>>>>>> User Id: ', JSON.stringify(response.text));
-
+        expect(res).not.to.be.undefined;
+        expect(res.text).not.to.be.undefined;
       })
       .catch((error) => {
-        console.log('>>>>>>>>>>> ERROR: ', error);
+        expect(error).to.be.undefined;
+        expect(true).to.be.false;
       });
 
   });

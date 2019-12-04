@@ -25,22 +25,22 @@ export async function main(req: Request, res: Response, userRepository: UserRepo
     return res.json({ message: 'The email field must be a valid email.' });
   }
 
-  const _id = uuid();
-
   const user = {
-    _id,
-    email: 'user@xyz.com',
-    password: '123ABC'
+    _id: uuid(),
+    email: req.body.email,
+    password: req.body.password
   } as User;
 
   userRepository.insert(user)
     .then((data) => {
       res.status(HttpStatus.CREATED);
       res.set('Content-Type', 'text/plain');
-      res.send(_id);
+      res.send(user._id);
     })
     .catch((error: Error) => {
       res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+      res.set('Content-Type', 'application/json'); 
+      res.json({ message: 'Internal Server Error' });      
     });
 
     return;
