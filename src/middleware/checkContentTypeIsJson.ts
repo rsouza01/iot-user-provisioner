@@ -1,10 +1,12 @@
+import * as HttpStatus from 'http-status-codes';
+
 export default function checkContentTypeIsJson(req, res, next) {
     if (!req.headers['content-type'].includes('application/json')) {
-        res.status(415);
+        res.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         res.set('Content-Type', 'application/json');
-        res.json({
+        return res.json({
             message: 'The "Content-Type" header must always be "application/json"'
         });
     }
-    next();
+    return next();
 }

@@ -29,7 +29,7 @@ export class UserMongoRepository implements UserRepository {
 
         this.userModel = mongoose.model('User', this.schema);
 
-        const uri = 'mongodb://iot-user-provisioner:iot-user-provisioner@localhost:27017/users';
+        const uri = 'mongodb://iotuserdatabase-user:iotuserdatabase-pwd@localhost:27017/iot-user-database';
 
         mongoose.connect(uri, { useNewUrlParser: true }).then(() => {
             console.info(`>>>>>>>>> Successfully connected to ${uri}`);
