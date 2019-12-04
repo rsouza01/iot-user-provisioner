@@ -9,7 +9,7 @@ services:
     ports:
       - 27017:27017
     environment:
-      - MONGO_INITDB_DATABASE=users
+      - MONGO_INITDB_DATABASE=iot-user-database
       - MONGO_INITDB_ROOT_USERNAME=iot-user-root
       - MONGO_INITDB_ROOT_PASSWORD=iot-user-passwd
     volumes:

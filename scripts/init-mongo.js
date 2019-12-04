@@ -1,12 +1,26 @@
-userDb = db.getSiblingDB('iot-user-db');
-
-
-userDb.createUser(
+db.createUser(
     {
-        user: "iot-user-provisioner",
-        pwd: "iot-user-provisioner",
+        user: "iotuserdatabase-user",
+        pwd: "iotuserdatabase-pwd",
         roles: [
-            "readWrite"
+            {
+                role: "readWrite",
+                db: "iot-user-database"
+            }
         ]
     }
 );
+
+db.users.drop();
+db.users.insertMany([
+    {
+        _id: 1,
+        email: 'useradmin@gmail.com',
+        password: '123wer'
+    },
+    {
+        _id: 2,
+        email: 'useradmin2@gmail.com',
+        password: '123wer'
+    }
+])
