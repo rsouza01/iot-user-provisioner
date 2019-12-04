@@ -2,10 +2,11 @@ import { Request, Response } from 'express';
 import * as HttpStatus from 'http-status-codes';
 import { UserMongoRepository } from '../../repository/mongoRepo';
 import User from '../../domain/user';
+import { UserRepository } from '../../repository/repository';
+import { v4 as uuid } from "uuid";
 
 
-
-export async function main(req: Request, res: Response, next) {
+export async function main(req: Request, res: Response, userRepository: UserRepository) {
 
   if (!Object.prototype.hasOwnProperty.call(req.body, 'email') || !Object.prototype.hasOwnProperty.call(req.body, 'password')) {
     res.status(400);
@@ -24,19 +25,23 @@ export async function main(req: Request, res: Response, next) {
     return res.json({ message: 'The email field must be a valid email.' });
   }
 
-  /*
-  const userRepository = new UserMongoRepository();
+  const _id = uuid();
 
   const user = {
+    _id,
     email: 'user@xyz.com',
     password: '123ABC'
   } as User;
 
-  userRepository.insert(user);
-  */
+  userRepository.insert(user)
+    .then((data) => {
+      res.status(HttpStatus.CREATED);
+      res.set('Content-Type', 'text/plain');
+      res.send(_id);
+    })
+    .catch((error: Error) => {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    });
 
-  res.status(HttpStatus.CREATED);
-  res.set('Content-Type', 'text/plain');
-  res.send('123');
-  return;
+    return;
 }

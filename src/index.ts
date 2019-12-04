@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import * as handlers from './handlers'
 import * as middleware from './middleware'
 import { errorHandler } from './middleware/errorHandler'
+import { UserMongoRepository } from './repository/mongoRepo';
 
 const app = express();
 
@@ -17,7 +18,9 @@ middleware.registerMiddleware(app);
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-handlers.registerRoutes(app);
+const userRepository = new UserMongoRepository;
+
+handlers.registerRoutes(app, userRepository);
 
 app.use(errorHandler);
 

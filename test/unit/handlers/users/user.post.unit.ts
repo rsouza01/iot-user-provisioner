@@ -30,12 +30,15 @@ describe('User - POST Handler', () => {
       .set('Content-Type', 'application/json')
       .then((res) => {
         response = res;
-        console.log('>>>>>>>>>>> RESPONSE OK');
+
+        console.log('>>>>>>>>>>> responsePayload.statusCode: ', response ? response.statusCode : 0);
+        //console.log('>>>>>>>>>>> RESPONSE: ', response);
+        console.log('>>>>>>>>>>> User Id: ', JSON.stringify(response.text));
+
       })
       .catch((error) => {
         console.log('>>>>>>>>>>> ERROR: ', error);
       });
 
-      console.log('>>>>>>>>>>> responsePayload.statusCode: ', response ? response.statusCode : 0);
-    });
+  });
 });

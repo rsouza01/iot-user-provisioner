@@ -17,6 +17,10 @@ export class UserMongoRepository implements UserRepository {
     constructor() {
 
         this.schema = new mongoose.Schema({
+            _id: {
+                type: String,
+                required: true
+            },
             email: {
                 type: String,
                 required: true
