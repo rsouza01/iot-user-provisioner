@@ -10,7 +10,8 @@ const app = express();
 
 const PORT = process.env.SERVER_PORT || 3000;
 
-const userRepository = RepositoryFactory.getRepository(RepositoryType.User) as UserRepository;
+//const userRepository = RepositoryFactory.getRepository(RepositoryType.User) as UserRepository;
+const userRepository = {} as UserRepository;
 
 middleware.registerMiddleware(app);
 handlers.registerRoutes(app, userRepository);
@@ -21,7 +22,7 @@ if (require.main === module) {
 
   app.listen(PORT, () => {
     // eslint-disable-next-line no-console
-    console.log(`Server started at ${process.env.SERVER_PROTOCOL}://${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}`);
+    console.log(`Server successfully started at ${process.env.SERVER_PROTOCOL}://${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}`);
   });
 }
 

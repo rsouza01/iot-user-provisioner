@@ -9,7 +9,10 @@ import { UserRepository } from '../../repository/repository';
 
 export function registerRoutes(app: Application, userRepository: UserRepository) {
 
+  console.log('Registering user.GET...');
   app.route('/user').get(injectHandlerDependencies(userGet.main, userRepository));
+  console.log('Registering users.GET...');
   app.route('/users').get(injectHandlerDependencies(usersGet.main, userRepository));
+  console.log('Registering user.POST...');
   app.route('/user').post(injectHandlerDependencies(userPost.main, userRepository));
 }

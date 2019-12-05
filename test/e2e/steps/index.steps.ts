@@ -115,6 +115,9 @@ export class UserCreateSteps {
       this.response.headers['content-type'];
     if (payloadType === 'JSON object') {
       // Check Content-Type header
+
+      console.log('>>>>>>>>>>>>>>>>>>>>', this.response.headers);
+      
       if (!contentType || !contentType.includes('application/json')) {
         throw new Error('Response not of Content-Type application / json');
       }

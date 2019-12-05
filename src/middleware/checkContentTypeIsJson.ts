@@ -2,6 +2,9 @@ import * as HttpStatus from 'http-status-codes';
 
 export default function checkContentTypeIsJson(req, res, next) {
     if (!req.headers['content-type'].includes('application/json')) {
+
+        console.log(`>>>>>>>> checkContentTypeIsJson (1)`);
+
         res.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         res.set('Content-Type', 'application/json');
         return res.json({

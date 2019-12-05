@@ -5,6 +5,8 @@ import { UserRepository } from '../repository/repository';
 
 export function registerRoutes(app: Application, userRepository: UserRepository) {
 
+    console.log('Registering routes...');
+    
     users.registerRoutes(app, userRepository);
     
     app.get("/", async (req: Request, res: Response, next) => {

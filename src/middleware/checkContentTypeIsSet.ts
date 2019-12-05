@@ -2,6 +2,9 @@ import * as HttpStatus from 'http-status-codes';
 
 export default function checkContentTypeIsSet(req, res, next) {
     if (req.headers['content-length'] && req.headers['content-length'] !== '0' && !req.headers['content-type']) {
+
+        console.log(`>>>>>>>> checkContentTypeIsSet (2)`);
+
         res.status(HttpStatus.BAD_REQUEST);
         res.set('Content-Type', 'application/json');
         return res.json({

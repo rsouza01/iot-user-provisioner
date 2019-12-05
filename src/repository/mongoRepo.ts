@@ -37,7 +37,7 @@ export class UserMongoRepository implements UserRepository {
         const uri = `${process.env.USER_DB_SERVER_PROTOCOL}://${credentials}@${process.env.USER_DB_SERVER_HOSTNAME}:${process.env.USER_DB_SERVER_PORT}/${process.env.USER_DB_SERVER_DATABASE}`;
 
         mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-            console.info(`Successfully connected to ${process.env.USER_DB_SERVER_PROTOCOL}://@${process.env.USER_DB_SERVER_HOSTNAME}:${process.env.USER_DB_SERVER_PORT}/${process.env.USER_DB_SERVER_DATABASE}`);
+            console.info(`Successfully connected to ${process.env.USER_DB_SERVER_PROTOCOL}://${process.env.USER_DB_SERVER_HOSTNAME}:${process.env.USER_DB_SERVER_PORT}/${process.env.USER_DB_SERVER_DATABASE}`);
           })
           .catch(error => {
             console.error('Error connecting to database: ', error);
