@@ -33,13 +33,14 @@ export class UserMongoRepository implements UserRepository {
 
         this.userModel = mongoose.model('User', this.schema);
 
-        const uri = 'mongodb://iotuserdatabase-user:iotuserdatabase-pwd@localhost:27017/iot-user-database';
+        const credentials = `${process.env.USER_DB_SERVER_USERNAME}:${process.env.USER_DB_SERVER_PASSWORD}`;
+        const uri = `${process.env.USER_DB_SERVER_PROTOCOL}://${credentials}@${process.env.USER_DB_SERVER_HOSTNAME}:${process.env.USER_DB_SERVER_PORT}/${process.env.USER_DB_SERVER_DATABASE}`;
 
-        mongoose.connect(uri, { useNewUrlParser: true }).then(() => {
-            console.info(`>>>>>>>>> Successfully connected to ${uri}`);
+        mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+            console.info(`Successfully connected to ${process.env.USER_DB_SERVER_PROTOCOL}://@${process.env.USER_DB_SERVER_HOSTNAME}:${process.env.USER_DB_SERVER_PORT}/${process.env.USER_DB_SERVER_DATABASE}`);
           })
           .catch(error => {
-            console.error('>>>>>>>>> Error connecting to database: ', error);
+            console.error('Error connecting to database: ', error);
           });
 
         this.userRepository = mongoose.model<UserDocument>('user', this.schema);

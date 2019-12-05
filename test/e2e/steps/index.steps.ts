@@ -12,13 +12,14 @@ export class UserCreateSteps {
   private response: any;
   private responsePayload: any;
   private request: any;
+  private userType : any;
 
   private requestPayload: any;
-  private userType: string = '';
 
   @when(/the client creates a (GET|POST|PATCH|PUT|DELETE|OPTIONS|HEAD) request to ([/\w-:.]+)$/)
   public createPost(method, path) {
-    this.request = superagent(method, `http://localhost:8080${path}`);
+    const serverUrl = `${process.env.SERVER_PROTOCOL}://${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}{path}`;
+    this.request = superagent(method, serverUrl);
   }
 
   @when(/^attaches a valid (.+) payload$/)
