@@ -9,7 +9,8 @@
     "build:prod": "rimraf ./build; tsc",
     "tests:unit": "npx mocha --recursive -r ts-node/register ./test/**/*.unit.ts",
     "tests:e2econfig": "cucumber-js -p default",
-    "tests:e2e": "npx dotenv -e .env cucumber-js -- test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts",
+    "tests:e2e": "dotenv -e .env ./scripts/e2e.test.sh",
+    "tests:_e2e": "npx dotenv -e .env cucumber-js -- test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts",
     "tests:e2eonly": "cucumber-js -p default --name '@only'",
     "tests:coverage": "dotenv nyc npm run tests:unit"
   },
