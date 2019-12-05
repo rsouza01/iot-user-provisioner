@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import * as HttpStatus from 'http-status-codes';
-import { UserMongoRepository } from '../../repository/mongoRepo';
 import User from '../../domain/user';
 import { UserRepository } from '../../repository/repository';
 import { v4 as uuid } from "uuid";
+
+import winston from 'winston';
 
 
 export async function main(req: Request, res: Response, userRepository: UserRepository) {
@@ -33,6 +34,19 @@ export async function main(req: Request, res: Response, userRepository: UserRepo
  
   userRepository.insert(user)
     .then((data) => {
+
+      //TODO: Create a logger.
+      const logger = winston.createLogger({
+        level: 'info',
+        format: winston.format.json(),
+        transports: [
+          new winston.transports.Console(),
+          new winston.transports.File({ filename: 'logfile.log' })
+        ]
+      });
+
+      logger.info(`User saved - data: ${JSON.stringify(user)}`);
+
       res.status(HttpStatus.CREATED);
       res.set('Content-Type', 'text/plain');
       res.send(user._id);

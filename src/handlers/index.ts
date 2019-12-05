@@ -3,9 +3,12 @@ import { Application, Request, Response } from 'express';
 import * as users from './users';
 import { UserRepository } from '../repository/repository';
 
+import Debug from "debug";
+const debug = Debug("iot-user-provisioner:handlers");
+
 export function registerRoutes(app: Application, userRepository: UserRepository) {
 
-    console.log('Registering routes...');
+    debug('Registering routes...');
     
     users.registerRoutes(app, userRepository);
     

@@ -6,21 +6,25 @@ import checkContentTypeIsJson from './checkContentTypeIsJson'
 import checkContentTypeIsSet from './checkContentTypeIsSet'
 import checkEmptyPayload from './checkEmptyPayload'
 
+import Debug from "debug";
+const debug = Debug("iot-user-provisioner:middleware");
+
+
 export function registerMiddleware(app: Application) {
 
-    console.log('Registering middlewares...');
+    debug('Registering middlewares...');
 
-    console.log('Registering CORS...');
+    debug('Registering CORS...');
     app.use(cors());
 
-    console.log('Registering checkEmptyPayload...');
+    debug('Registering checkEmptyPayload...');
     app.use(checkEmptyPayload);
-    console.log('Registering checkContentTypeIsSet...');
+    debug('Registering checkContentTypeIsSet...');
     app.use(checkContentTypeIsSet);
-    console.log('Registering checkContentTypeIsJson...');
+    debug('Registering checkContentTypeIsJson...');
     app.use(checkContentTypeIsJson)
 
-    console.log('Registering bodyParser...');
+    debug('Registering bodyParser...');
     app.use(bodyParser.json({ limit: '50mb' }));
     app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
     

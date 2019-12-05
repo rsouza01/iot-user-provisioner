@@ -1,13 +1,17 @@
 import express from 'express';
 
+import Debug from "debug";
+
 import * as handlers from './handlers'
 import * as middleware from './middleware'
 import { errorHandler } from './middleware/errorHandler'
 import { RepositoryFactory, RepositoryType } from './repository/repositoryFactory';
 import { UserRepository } from './repository/repository';
 
-console.log(`..............................................................................................................`);
-console.log(`Starting server....`);
+const debug = Debug("iot-user-provisioner");
+
+debug(`..............................................................................................................`);
+debug(`Starting server....`);
 
 const app = express();
 
@@ -22,8 +26,7 @@ app.use(errorHandler);
 
 if (require.main === module) {
   app.listen(PORT, () => {
-    // eslint-disable-next-line no-console
-    console.log(`Server successfully started at ${process.env.SERVER_PROTOCOL}://${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}`);
+    debug(`Server successfully started at ${process.env.SERVER_PROTOCOL}://${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}`);
   });
 }
 
