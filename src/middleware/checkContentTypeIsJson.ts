@@ -1,9 +1,12 @@
 import * as HttpStatus from 'http-status-codes';
+import Debug from "debug";
+
+const debug = Debug("iot-user-provisioner:checkContentTypeIsJson");
 
 export default function checkContentTypeIsJson(req, res, next) {
     if (!req.headers['content-type'].includes('application/json')) {
 
-        console.log(`>>>>>>>> checkContentTypeIsJson (1)`);
+        debug(`Invalid req.headers['content-type']`);
 
         res.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         res.set('Content-Type', 'application/json');

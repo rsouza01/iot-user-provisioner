@@ -28,7 +28,7 @@ Feature: General
     And the payload of the response should be a JSON object
     And contains a message property which says 'The "Content-Type" header must be set for requests with a non-empty payload'
 
-  Scenario: Content-Type Header should be set to application/json @only
+  Scenario: Content-Type Header should be set to application/json
 
     All requests which has a "Content-Type" header must set its value to contain "application/json"
 

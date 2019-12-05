@@ -18,7 +18,7 @@ export class UserCreateSteps {
 
   @when(/the client creates a (GET|POST|PATCH|PUT|DELETE|OPTIONS|HEAD) request to ([/\w-:.]+)$/)
   public createPost(method, path) {
-    const serverUrl = `${process.env.SERVER_PROTOCOL}://${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}{path}`;
+    const serverUrl = `${process.env.SERVER_PROTOCOL}://${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}${path}`;
     this.request = superagent(method, serverUrl);
   }
 
@@ -115,9 +115,6 @@ export class UserCreateSteps {
       this.response.headers['content-type'];
     if (payloadType === 'JSON object') {
       // Check Content-Type header
-
-      console.log('>>>>>>>>>>>>>>>>>>>>', this.response.headers);
-      
       if (!contentType || !contentType.includes('application/json')) {
         throw new Error('Response not of Content-Type application / json');
       }

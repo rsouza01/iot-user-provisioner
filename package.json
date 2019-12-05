@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "dotenv -e .env nodemon",
+    "start:dev": "DEBUG=iot-user-provisioner* dotenv -e .env nodemon",
     "start": "dotenv -e .env npm run build:prod; dotenv -e .env node ./build/index.js",
     "build:prod": "rimraf ./build; tsc",
     "tests:unit": "npx mocha --recursive -r ts-node/register ./test/**/*.unit.ts",
@@ -21,6 +21,7 @@
     "@types/chai": "^4.2.5",
     "@types/cors": "^2.8.6",
     "@types/cucumber": "^6.0.0",
+    "@types/debug": "^4.1.5",
     "@types/express": "^4.17.2",
     "@types/mocha": "^5.2.7",
     "@types/mongoose": "^5.5.32",
@@ -41,6 +42,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "debug": "^4.1.1",
     "express": "^4.17.1",
     "http-status-codes": "^1.4.0",
     "mongoose": "^5.7.13"
