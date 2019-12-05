@@ -14,8 +14,8 @@ done
 # TEST Mongo: nc -v localhost 27017
 echo "Connected in  ($COUNTER seconds so far)"
 
-npm run start:dev &
+npm run start &
 
 
 # Tearing down
-docker-compose down
+#docker-compose down
