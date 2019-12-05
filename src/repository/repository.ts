@@ -1,5 +1,9 @@
 import User from "../domain/user";
 
-export interface UserRepository {
+export interface Repository {
+
+}
+
+export interface UserRepository extends Repository {
     insert(user: User): Promise<any>;
 }

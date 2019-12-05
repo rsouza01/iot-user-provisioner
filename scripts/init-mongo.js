@@ -14,13 +14,8 @@ db.createUser(
 db.users.drop();
 db.users.insertMany([
     {
-        _id: 1,
+        _id: 'c7b5c7fb-0701-4736-9d05-798f1eef5b54',
         email: 'useradmin@gmail.com',
-        password: '123wer'
-    },
-    {
-        _id: 2,
-        email: 'useradmin2@gmail.com',
         password: '123wer'
     }
 ])

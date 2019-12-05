@@ -1,25 +1,18 @@
 import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
 
 import * as handlers from './handlers'
 import * as middleware from './middleware'
 import { errorHandler } from './middleware/errorHandler'
-import { UserMongoRepository } from './repository/mongoRepo';
+import { RepositoryFactory, RepositoryType } from './repository/repositoryFactory';
+import { UserRepository } from './repository/repository';
 
 const app = express();
 
 const PORT = process.env.SERVER_PORT || 3000;
 
-
-app.use(cors());
+const userRepository = RepositoryFactory.getRepository(RepositoryType.User) as UserRepository;
 
 middleware.registerMiddleware(app);
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-
-const userRepository = new UserMongoRepository;
-
 handlers.registerRoutes(app, userRepository);
 
 app.use(errorHandler);
