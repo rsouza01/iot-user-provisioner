@@ -4,8 +4,7 @@ import User from '../../domain/user';
 import { UserRepository } from '../../repository/repository';
 import { v4 as uuid } from "uuid";
 
-import winston from 'winston';
-
+import * as defaultLogger from '@iot-stuff/iot-logger';
 
 export async function main(req: Request, res: Response, userRepository: UserRepository) {
   if (!Object.prototype.hasOwnProperty.call(req.body, 'email') || !Object.prototype.hasOwnProperty.call(req.body, 'password')) {
@@ -35,17 +34,8 @@ export async function main(req: Request, res: Response, userRepository: UserRepo
   userRepository.insert(user)
     .then((data) => {
 
-      //TODO: Create a logger.
-      const logger = winston.createLogger({
-        level: 'info',
-        format: winston.format.json(),
-        transports: [
-          new winston.transports.Console(),
-          new winston.transports.File({ filename: 'logfile.log' })
-        ]
-      });
-
-      logger.info(`User saved - data: ${JSON.stringify(user)}`);
+      const iotLogger = defaultLogger.getIoTDefaultLogger('ApplicationName', '1', 'filename.log');
+      iotLogger.info(`User saved - data: ${JSON.stringify(user)}`);
 
       res.status(HttpStatus.CREATED);
       res.set('Content-Type', 'text/plain');
