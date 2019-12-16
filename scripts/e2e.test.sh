@@ -37,8 +37,7 @@ done
 # Run the End-to-End tests
 npx dotenv -e .env cucumber-js -- ./test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts
 
-# Kill everyting
-SIGTERM signal
+# Kill everyting SIGTERM signal
 kill -15 0
 
 # Tear down
