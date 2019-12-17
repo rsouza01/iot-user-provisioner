@@ -8,18 +8,18 @@ import * as defaultLogger from '@iot-stuff/iot-logger';
 
 export async function main(req: Request, res: Response, userRepository: UserRepository) {
   if (!Object.prototype.hasOwnProperty.call(req.body, 'email') || !Object.prototype.hasOwnProperty.call(req.body, 'password')) {
-    res.status(400);
+    res.status(HttpStatus.BAD_REQUEST);
     res.set('Content-Type', 'application/json');
     return res.json({ message: 'Payload must contain at least the email and password fields' });
   }
   if (typeof req.body.email !== 'string' || typeof req.body.password !== 'string') {
-    res.status(400);
+    res.status(HttpStatus.BAD_REQUEST);
     res.set('Content-Type', 'application/json');
     return res.json({ message: 'The email and password fields must be of type string' });
   }
 
   if (!/^[\w.+]+@\w+\.\w+$/.test(req.body.email)) {
-    res.status(400);
+    res.status(HttpStatus.BAD_REQUEST);
     res.set('Content-Type', 'application/json');
     return res.json({ message: 'The email field must be a valid email.' });
   }
