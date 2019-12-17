@@ -49,7 +49,6 @@ npx dotenv -e .env cucumber-js -- ./test/e2e/features/**/*.feature --require-mod
 
 # Tear down
 echo "Destroying docker-compose stack." 
-#docker-compose down
 docker-compose -f ./scripts/docker-compose.yml down
 
 
