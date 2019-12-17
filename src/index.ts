@@ -11,7 +11,7 @@ import { UserRepository } from './repository/repository';
 import * as defaultLogger from "@iot-stuff/iot-logger";
 import { IoTLogger } from "@iot-stuff/iot-logger";
 
-const debug = Debug("iot-user-provisioner");
+const debug = Debug(process.env.APP_NAME || "iot-user-provisioner");
 
 debug(`..............................................................................................................`);
 debug(`Starting server....`);

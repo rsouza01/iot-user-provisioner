@@ -23,20 +23,24 @@ export async function main(
 
   userEngine.create(req, userRepository)
     .then((result) => {
+      iotLogger.info(`user.CREATE.resolve - Result = ${JSON.stringify(result)}`);
       res.status(HttpStatus.CREATED);
       res.set('Content-Type', 'text/plain');
-      return res.send(result._id);
+      //return res.send(result._id);
+      return res.send(123);
     }, (err) => {
       if (err instanceof ValidationError) {
         res.status(HttpStatus.BAD_REQUEST);
         res.set('Content-Type', 'application/json');
+        iotLogger.info('user.CREATE.reject');
         return res.json({ message: err.message });
       }
       return undefined;
     })
     .catch(err => {
 
-      iotLogger.info(`Error: ${JSON.stringify(err)}`);
+      iotLogger.info(`Error: ${JSON.stringify(err, Object.getOwnPropertyNames(err))}`);
+      iotLogger.info('user.CREATE.reject.catch');
 
       res.status(HttpStatus.INTERNAL_SERVER_ERROR);
       res.set('Content-Type', 'application/json');

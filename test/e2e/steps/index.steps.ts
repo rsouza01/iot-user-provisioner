@@ -106,6 +106,7 @@ export class UserCreateSteps {
 
   @then(/^our API should respond with a ([1-5]\d{2}) HTTP status code$/)
   public checkHTTPResponse(statusCode: number) {
+    assert.notEqual(this.response, undefined);
     assert.equal(this.response.statusCode, statusCode);
   }
 

@@ -10,8 +10,8 @@ export enum RepositoryType {
 export class RepositoryFactory {
     static getRepository(repositoryType: RepositoryType): Repository {
         switch(repositoryType) {
-            //case RepositoryType.User: return new UserMongoRepository();
-            case RepositoryType.User: return new NullRepository();
+            case RepositoryType.User: return new UserMongoRepository();
+            //case RepositoryType.User: return new NullRepository();
         }
     }
 }

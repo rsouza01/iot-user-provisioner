@@ -15,7 +15,7 @@ export class NullRepository implements UserRepository {
 
     async insert(user: User): Promise<any> {
         return new Promise((resolve, reject) => {
-            resolve({});
+            resolve(user);
         });
     }
 }
