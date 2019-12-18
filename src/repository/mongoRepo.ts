@@ -17,7 +17,6 @@ export class UserMongoRepository implements UserRepository {
     private userRepository: any;
 
     constructor() {
-
         this.schema = new mongoose.Schema({
             _id: {
                 type: String,
@@ -39,26 +38,21 @@ export class UserMongoRepository implements UserRepository {
         const uri = `${process.env.USER_DB_SERVER_PROTOCOL}://${credentials}@${process.env.USER_DB_SERVER_HOSTNAME}:${process.env.USER_DB_SERVER_PORT}/${process.env.USER_DB_SERVER_DATABASE}`;
 
         mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-            console.info(`Successfully connected to ${process.env.USER_DB_SERVER_PROTOCOL}://${process.env.USER_DB_SERVER_HOSTNAME}:${process.env.USER_DB_SERVER_PORT}/${process.env.USER_DB_SERVER_DATABASE}`);
+            //TODO: Use log
             debug(`Successfully connected to ${process.env.USER_DB_SERVER_PROTOCOL}://${process.env.USER_DB_SERVER_HOSTNAME}:${process.env.USER_DB_SERVER_PORT}/${process.env.USER_DB_SERVER_DATABASE}`);
         })
           .catch(error => {
-            console.error('Error connecting to database: ', error);
+            //TODO: Use log
+            debug(`Error connecting to database: ${error}`);
           });
 
         this.userRepository = mongoose.model<UserDocument>('user', this.schema);
-
     }
 
     async insert(user: User): Promise<any> {
-
-        debug(`insert.a - Received object: ${JSON.stringify(user)}`);
-
         return this.userRepository.create(user)
             .then((data: UserDocument) => {
-                debug(`insert.b - Saved object: ${JSON.stringify(data)}`);
-                Promise.resolve(data);
-                return;
+                return Promise.resolve(data);
             })
             .catch((error: Error) => {
                 throw error;

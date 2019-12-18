@@ -11,7 +11,7 @@
     "tests:e2econfig": "cucumber-js -p default",
     "tests:e2e_container": "dotenv -e .env ./scripts/e2e.test.sh",
     "tests:e2e": "npx dotenv -e .env cucumber-js -- test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts",
-    "tests:e2eonly": "cucumber-js -p default --name '@only'",
+    "tests:e2eonly": "npx dotenv -e .env cucumber-js -- test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts  --name '@only'",
     "tests:coverage": "dotenv -e .env nyc npm run tests:unit"
   },
   "keywords": [],

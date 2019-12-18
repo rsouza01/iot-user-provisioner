@@ -1,5 +1,6 @@
 import { Request } from "express";
 import { v4 as uuid } from "uuid";
+import Debug from "debug";
 
 import User from "../domain/user";
 import { UserRepository } from "../repository/repository";
@@ -8,6 +9,8 @@ import ValidationError from "../validators/validator-error";
 import validate from "../validators/users/create";
 import * as defaultLogger from "@iot-stuff/iot-logger";
 import { IoTLogger } from "@iot-stuff/iot-logger";
+
+const debug = Debug("iot-user-provisioner:UserEngine");
 
 export default class UserEngine {
 
@@ -30,13 +33,14 @@ export default class UserEngine {
             password: req.body.password
         } as User;
 
-        userRepository
+        return userRepository
             .insert(user)
             .then(data => {
-                this.iotLogger.info(`User saved - data: ${JSON.stringify(user)}`);
+                this.iotLogger.info(`User saved - data: ${JSON.stringify(data)}`);
                 return Promise.resolve(user);
             })
             .catch((error: Error) => {
+                this.iotLogger.error(`Insert Rejected - error: ${JSON.stringify(error)}`);
                 return Promise.reject(error);
             });
     }

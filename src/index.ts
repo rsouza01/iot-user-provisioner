@@ -13,7 +13,6 @@ import { IoTLogger } from "@iot-stuff/iot-logger";
 
 const debug = Debug(process.env.APP_NAME || "iot-user-provisioner");
 
-debug(`..............................................................................................................`);
 debug(`Starting server....`);
 
 const app = express();
