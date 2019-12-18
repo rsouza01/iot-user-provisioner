@@ -41,6 +41,12 @@ export class UserCreateSteps {
     }
   };
 
+  @when(/^attaches (.+) as the payload$/)
+  public attachPayload(payload: string) {
+    this.requestPayload = JSON.parse(payload); 
+    this.request .send(payload) .set('Content-Type', 'application/json'); 
+  };
+
   @when(/^sends the request$/)
   public sendRequest(callback) {
     this.request.then((response) => {
@@ -93,7 +99,7 @@ export class UserCreateSteps {
   };
 
   @when(/^attaches an? (.+) payload which is missing the ([a-zA-Z0-9, ]+) fields?$/)
-  public attachPayload(payloadType, missingFields) {
+  public attachPayloadWithMissingFields(payloadType, missingFields) {
     this.requestPayload = getValidPayload(payloadType);
     const fieldsToDelete = convertStringToArray(missingFields);
 

@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@iot-stuff/iot-logger": "^1.1.0",
+    "ajv": "^6.10.2",
     "cors": "^2.8.5",
     "debug": "^4.1.1",
     "express": "^4.17.1",

@@ -50,39 +50,3 @@ export async function main(
 
     return;
 }
-
-export async function _main(
-  req: Request,
-  res: Response,
-  userRepository: UserRepository
-) {
-
-  const validationResults = validate(req);
-
-  if (validationResults instanceof ValidationError) {
-    res.status(HttpStatus.BAD_REQUEST);
-    res.set("Content-Type", "application/json");
-    return res.json({ message: validationResults.message });
-  }
-
-  const user = {
-    _id: uuid(),
-    email: req.body.email,
-    password: req.body.password
-  } as User;
-
-  userRepository
-    .insert(user)
-    .then(data => {
-      res.status(HttpStatus.CREATED);
-      res.set("Content-Type", "text/plain");
-      res.send(user._id);
-    })
-    .catch((error: Error) => {
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR);
-      res.set("Content-Type", "application/json");
-      res.json({ message: "Internal Server Error" });
-    });
-
-  return;
-}
