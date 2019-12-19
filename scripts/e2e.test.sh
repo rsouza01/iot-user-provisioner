@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+trap "exit 0" INT TERM
+
 clear
 
 echo -ne "Checking port $SERVER_PORT..." 
