@@ -24,8 +24,12 @@ env:
 # these are executed in order.  each must pass for the next to be run
 stages:
   - e2e_test
+  - build_prod
 
 jobs:
   include:
     - stage: e2e_test
       script: npm run tests:e2e_container
+
+    - stage: build_prod
+      script: npm run build:prod
