@@ -1,6 +1,7 @@
 # Welcome to iot-user-provisioner 👋
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+[![Build Status](https://travis-ci.com/IoT-Stuff/iot-user-provisioner.svg?branch=master)](https://travis-ci.com/IoT-Stuff/iot-user-provisioner)
 
 ## Install
 
