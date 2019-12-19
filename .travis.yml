@@ -24,4 +24,4 @@ env:
 cron:
     - branch: master
        interval: daily
-       options: always run        
+       options: always run
