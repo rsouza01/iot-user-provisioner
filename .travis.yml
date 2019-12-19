@@ -5,7 +5,7 @@ node_js:
     - '12'
     - '12.14.0'
 before_install:
-- npm config set //npm.pkg.github.com/:_authToken=$NPM_TOKEN    
+    - npm config set //npm.pkg.github.com/:_authToken=$NPM_TOKEN    
 env:
     global:
         - SERVER_PROTOCOL=http
@@ -20,3 +20,8 @@ env:
         - APP_NAME=iot-user-provisioner
         - APP_VERSION=1
         - APP_LOG_FILE=iot-user-provisioner
+        
+cron:
+    - branch: master
+       interval: daily
+       options: always run        
