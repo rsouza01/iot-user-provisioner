@@ -59,7 +59,8 @@ echo "done."
 
 # Kill everyting SIGTERM signal
 echo -ne "Killing group processes..." 
-kill -15 0
+#kill -15 0
+pkill -P $$
 
 #Finishing
 echo "Exiting..."
