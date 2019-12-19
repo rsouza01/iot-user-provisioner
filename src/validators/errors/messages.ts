@@ -15,4 +15,3 @@ export default function generateValidationErrorMessage(errors) {
     }
     return 'The object is not valid';
 }
-}
