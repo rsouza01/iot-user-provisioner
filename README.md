@@ -3,6 +3,7 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 [![Build Status](https://travis-ci.com/IoT-Stuff/iot-user-provisioner.svg?branch=master)](https://travis-ci.com/IoT-Stuff/iot-user-provisioner)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FIoT-Stuff%2Fiot-user-provisioner.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FIoT-Stuff%2Fiot-user-provisioner?ref=badge_shield)
 
 ## Install
 
@@ -33,3 +34,7 @@ Give a ⭐️ if this project helped you!
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FIoT-Stuff%2Fiot-user-provisioner.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FIoT-Stuff%2Fiot-user-provisioner?ref=badge_large)
