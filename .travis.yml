@@ -28,8 +28,10 @@ stages:
 
 jobs:
   include:
-    - stage: e2e_test
+    - name: 'End to End Tests'
+      stage: e2e_test
       script: npm run tests:e2e_container
 
-    - stage: build_prod
+    - name: 'Build Stage'
+      stage: build_prod
       script: npm run build:prod
