@@ -4,6 +4,8 @@ node_js:
     - 'lts/*'
     - '12'
     - '12.14.0'
+before_install:
+- npm config set //npm.pkg.github.com/:_authToken=$NPM_TOKEN    
 env:
     global:
         - SERVER_PROTOCOL=http
