@@ -10,14 +10,13 @@ const getValidPayload = () => {
   };
 }
 
-const server: string = 'http://localhost:8080';
-const path: string = '/user';
+const server = `${process.env.SERVER_PROTOCOL}://${process.env.SERVER_HOSTNAME}:${process.env.SERVER_PORT}/user`;
 
 describe('User - POST Handler', () => {
 
   it.only('Create user successfully', async () => {
 
-    const request = superagent('POST', `${server}${path}`);
+    const request = superagent('POST', server);
 
     let response;
 

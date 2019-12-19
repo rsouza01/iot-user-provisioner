@@ -1,9 +1,11 @@
+import Debug from 'debug';
 import mongoose from 'mongoose';
 import { UserRepository } from './repository';
 import User from '../domain/user';
 
+const debug = Debug('iot-user-provisioner:postgres-repo');
 
-export class NullRepository implements UserRepository {
+export class UserPostgresRepository implements UserRepository {
   constructor() {
   }
 
