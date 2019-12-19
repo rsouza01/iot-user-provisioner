@@ -28,6 +28,8 @@ npm run start
 
 Give a ⭐️ if this project helped you!
 
+## References
+* Travis CICD: https://boneskull.com/mocha-and-travis-ci-build-stages/
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
