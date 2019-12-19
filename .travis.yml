@@ -22,10 +22,5 @@ env:
         - APP_LOG_FILE=iot-user-provisioner
 jobs:
   include:
- - stage: npm run tests:e2e_container
-      script: echo "Running E2E tests ..."      
-
-cron:
-    - branch: master
-       interval: daily
-       options: always run
+    - stage: e2e
+      script: npm run tests:e2e_container
