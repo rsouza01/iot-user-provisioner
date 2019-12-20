@@ -19,6 +19,10 @@ env:
         - APP_VERSION=1
         - APP_LOG_FILE=iot-user-provisioner
 
+branches:
+  only:
+  - master
+  
 # these are executed in order.  each must pass for the next to be run
 stages:
   - e2e_test
