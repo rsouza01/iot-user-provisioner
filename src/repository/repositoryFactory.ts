@@ -2,7 +2,7 @@ import { Repository } from './repository';
 import { UserMongoRepository } from './mongoRepo';
 
 export enum RepositoryType {
-    User
+  User
 }
 
 export class RepositoryFactory {

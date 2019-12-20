@@ -4,5 +4,5 @@ export interface Repository {
 }
 
 export interface UserRepository extends Repository {
-    insert(user: User): Promise<any>;
+  insert(user: User): Promise<any>;
 }
