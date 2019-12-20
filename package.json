@@ -9,7 +9,7 @@
     "start:dev": "DEBUG=iot-user-provisioner* dotenv -e .env nodemon",
     "start": "dotenv -e .env npm run build:prod; dotenv -e .env node ./build/index.js",
     "build:prod": "npx rimraf ./node_modules ./build; npm i; tsc",
-    "tests": "npm run tests:unit; npm run tests:e2e_container",
+    "test": "npm run tests:unit; npm run tests:e2e_container",
     "tests:unit": "npx mocha --recursive -r ts-node/register ./test/**/*.unit.ts",
     "tests:e2econfig": "cucumber-js -p default",
     "tests:e2e_container": "dotenv -e .env ./scripts/e2e.test.sh",
