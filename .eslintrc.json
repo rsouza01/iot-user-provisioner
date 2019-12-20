@@ -19,7 +19,19 @@
   "plugins": [
     "@typescript-eslint"
   ],
+  "overrides": [
+    {
+      "files": [
+        "*.test.js"
+      ],
+      "rules": {
+        "func-names": "off",
+        "prefer-arrow-callback": "off"
+      }
+    }
+  ],
   "rules": {
+    "no-underscore-dangle": "off",
     "@typescript-eslint/indent": [
       2,
       2
