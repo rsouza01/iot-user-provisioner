@@ -1,7 +1,18 @@
-import { expect } from "chai";
 import "mocha";
+import { expect } from "chai";
+import { stub } from "sinon";
 
 import superagent from "superagent";
+
+import main from "../../../../src/handlers/users/user.post";
+
+import ValidationError from "../../../../src/validators/errors/validation-error";
+
+const createStubs = {
+  success: stub().resolves({ _id: "foo" }),
+  validationError: stub().rejects(new ValidationError()),
+  otherError: stub().rejects(new Error())
+};
 
 const getValidPayload = () => {
   return {

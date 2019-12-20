@@ -15,7 +15,7 @@ import UserEngine from '../../engines/user';
 
 const debug = Debug('iot-user-provisioner:user.post');
 
-export async function main(
+export default async function main(
   req: Request,
   res: Response,
   userRepository: UserRepository,
