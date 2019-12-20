@@ -3,7 +3,8 @@ import Ajv from 'ajv';
 
 import profileSchema from '../../schema/users/profile.json';
 import createUserSchema from '../../schema/users/create.json';
-import ValidationError from '../validator-error';
+import ValidationError from '../../validators/errors/validation-error';
+
 import generateValidationErrorMessage from '../errors/messages';
 
 function validate(req: Request) {

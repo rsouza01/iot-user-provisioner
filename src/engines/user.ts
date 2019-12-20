@@ -6,7 +6,7 @@ import * as defaultLogger from '@iot-stuff/iot-logger';
 import { IoTLogger } from '@iot-stuff/iot-logger';
 import User from '../domain/user';
 import { UserRepository } from '../repository/repository';
-import ValidationError from '../validators/validator-error';
+import ValidationError from '../validators/errors/validation-error';
 
 import validate from '../validators/users/create';
 
