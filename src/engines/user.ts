@@ -9,10 +9,11 @@ import { UserRepository } from '../repository/repository';
 import ValidationError from '../validators/errors/validation-error';
 
 import validate from '../validators/users/create';
+import Engine from './engine';
 
 const debug = Debug('iot-user-provisioner:UserEngine');
 
-export default class UserEngine {
+export default class UserEngine implements Engine{
   iotLogger: IoTLogger;
 
   constructor(context, iotLogger: IoTLogger) {
