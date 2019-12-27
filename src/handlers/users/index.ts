@@ -8,6 +8,7 @@ import * as userPost from './user.post';
 import injectHandlerDependencies from '../../utils/inject-handler-dependencies';
 import { UserRepository } from '../../repository/repository';
 import UserEngine from '../../engines/user';
+import ValidationError from '../../validators/errors/validation-error'
 
 const debug = Debug('iot-user-provisioner:user-handlers');
 
@@ -18,9 +19,6 @@ export function registerRoutes(
   iotLogger: IoTLogger,
 ) {
 
-  const handlerToEngineMap = new Map([
-    [userPost.main, engine]
-  ]);
   /*
   debug('Registering user.GET...');
   app.route('/user').get(injectHandlerDependencies(userGet.main, userRepository, engine, iotLogger));
@@ -28,5 +26,5 @@ export function registerRoutes(
   app.route('/users').get(injectHandlerDependencies(usersGet.main, userRepository, engine, iotLogger));
   */
   debug('Registering user.POST...');
-  app.route('/user').post(injectHandlerDependencies(userPost.main, userRepository, engine, iotLogger));
+  app.route('/user').post(injectHandlerDependencies(userPost.main, userRepository, engine, iotLogger, ValidationError));
 }

@@ -21,7 +21,8 @@ export async function main(
   res: Response,
   userRepository: UserRepository,
   engine: Engine,
-  iotLogger: IoTLogger
+  iotLogger: IoTLogger,
+  ValidationError
 ) {
   const userEngine = engine as UserEngine;
 
