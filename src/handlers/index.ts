@@ -3,19 +3,25 @@ import { IoTLogger } from '@iot-stuff/iot-logger';
 
 import Debug from 'debug';
 import * as users from './users';
-import { UserRepository } from '../repository/repository';
+import * as organizations from './organizations';
 import UserEngine from '../engines/user';
+import { UserRepository } from '../repository/repository';
+
+import { RepositoryFactory, RepositoryType } from '../repository/repositoryFactory';
+
 
 const debug = Debug('iot-user-provisioner:handlers');
 
-export default function registerRoutes(
+export function registerRoutes(
   app: Application,
-  userRepository: UserRepository,
-  engine: UserEngine,
   iotLogger: IoTLogger) {
   debug('Registering routes...');
 
-  users.registerRoutes(app, userRepository, engine, iotLogger);
+  const userRepository = RepositoryFactory.getRepository(RepositoryType.User) as UserRepository;
+  const userEngine: UserEngine = new UserEngine({}, iotLogger);
+
+  users.registerRoutes(app, userRepository, userEngine, iotLogger);
+  organizations.registerRoutes(app, userRepository, userEngine, iotLogger);
 
   app.get('/', async (req: Request, res: Response) => {
     res.send({

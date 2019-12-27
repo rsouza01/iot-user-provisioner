@@ -16,11 +16,11 @@ import Engine from "../../engines/engine";
 
 const debug = Debug("iot-user-provisioner:user.post");
 
-export default async function main(
+export async function main(
   req: Request,
   res: Response,
-  engine: Engine,
   userRepository: UserRepository,
+  engine: Engine,
   iotLogger: IoTLogger
 ) {
   const userEngine = engine as UserEngine;

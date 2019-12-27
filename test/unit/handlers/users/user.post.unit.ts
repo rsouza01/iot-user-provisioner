@@ -4,7 +4,7 @@ import { stub } from "sinon";
 
 import superagent from "superagent";
 
-import main from "../../../../src/handlers/users/user.post";
+import { main } from "../../../../src/handlers/users/user.post"
 
 import ValidationError from "../../../../src/validators/errors/validation-error";
 
