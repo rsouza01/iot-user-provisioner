@@ -9,6 +9,7 @@ import * as middleware from './middleware';
 import { errorHandler } from './middleware/errorHandler';
 import { RepositoryFactory, RepositoryType } from './repository/repositoryFactory';
 import { UserRepository } from './repository/repository';
+import UserEngine from './engines/user';
 
 
 const debug = Debug(process.env.APP_NAME || 'iot-user-provisioner');
@@ -27,8 +28,10 @@ const iotLogger = defaultLogger.getIoTDefaultLogger(
   process.env.APP_LOG_FILE,
 );
 
+const userEngine: UserEngine = new UserEngine({}, iotLogger);
+
 middleware.registerMiddleware(app);
-handlers.registerRoutes(app, userRepository, iotLogger);
+handlers.registerRoutes(app, userRepository, userEngine, iotLogger);
 
 app.use(errorHandler);
 

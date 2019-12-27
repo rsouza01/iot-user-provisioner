@@ -1,5 +1,5 @@
-export default function injectHandlerDependencies(handler, db, logger) {
+export default function injectHandlerDependencies(handler, db, engine, logger) {
   return (req, res) => {
-    handler(req, res, db, logger);
+    handler(req, res, db, engine, logger);
   };
 }
