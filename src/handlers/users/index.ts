@@ -12,7 +12,11 @@ import { UserRepository } from '../../repository/repository';
 
 const debug = Debug('iot-user-provisioner:user-handlers');
 
-export function registerRoutes(app: Application, userRepository: UserRepository, iotLogger: IoTLogger) {
+export default function registerRoutes(
+  app: Application,
+  userRepository: UserRepository,
+  iotLogger: IoTLogger,
+) {
   debug('Registering user.GET...');
   app.route('/user').get(injectHandlerDependencies(userGet.main, userRepository, iotLogger));
   debug('Registering users.GET...');

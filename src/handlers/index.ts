@@ -7,7 +7,10 @@ import { UserRepository } from '../repository/repository';
 
 const debug = Debug('iot-user-provisioner:handlers');
 
-export function registerRoutes(app: Application, userRepository: UserRepository, iotLogger: IoTLogger) {
+export default function registerRoutes(
+  app: Application,
+  userRepository: UserRepository,
+  iotLogger: IoTLogger) {
   debug('Registering routes...');
 
   users.registerRoutes(app, userRepository, iotLogger);

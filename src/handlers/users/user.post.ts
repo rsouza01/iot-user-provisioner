@@ -18,13 +18,14 @@ const debug = Debug('iot-user-provisioner:user.post');
 export default async function main(
   req: Request,
   res: Response,
+  engine: any,
   userRepository: UserRepository,
   iotLogger: IoTLogger,
 ) {
-  const userEngine = new UserEngine({}, iotLogger);
+  // const userEngine = new UserEngine({}, iotLogger);
 
-  userEngine.create(req, userRepository)
-    .then((result) => {
+  engine.create(req, userRepository)
+    .then((result: User) => {
       iotLogger.info(`user.CREATE.resolve - Result = ${JSON.stringify(result)}`);
       res.status(HttpStatus.CREATED);
       res.set('Content-Type', 'text/plain');
