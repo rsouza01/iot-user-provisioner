@@ -13,7 +13,7 @@ import Engine from './engine';
 
 const debug = Debug('iot-user-provisioner:UserEngine');
 
-export default class UserEngine implements Engine{
+export default class UserEngine implements Engine {
   iotLogger: IoTLogger;
 
   constructor(context, iotLogger: IoTLogger) {
@@ -21,6 +21,9 @@ export default class UserEngine implements Engine{
   }
 
   public async create(req: Request, userRepository: UserRepository): Promise<any> {
+
+    console.log('>>>>>>>>> UserEngine.create');
+
     const validationResults = validate(req);
 
     if (validationResults instanceof ValidationError) {

@@ -19,18 +19,18 @@ const debug = Debug("iot-user-provisioner:user.post");
 export async function main(
   req: Request,
   res: Response,
-  userRepository: UserRepository,
+  repository: UserRepository,
   engine: Engine,
-  iotLogger: IoTLogger,
+  logger: IoTLogger,
   ValidationError
 ) {
   const userEngine = engine as UserEngine;
 
-  userEngine
-    .create(req, userRepository)
+  return userEngine
+    .create(req, repository)
     .then(
-      result => {
-        iotLogger.info(
+      (result) => {
+        logger.info(
           `user.CREATE.resolve - Result = ${JSON.stringify(result)}`
         );
         res.status(HttpStatus.CREATED);
@@ -39,7 +39,7 @@ export async function main(
       },
       err => {
         if (err instanceof ValidationError) {
-          iotLogger.info(
+          logger.info(
             `Error: ${JSON.stringify(err, Object.getOwnPropertyNames(err))}`
           );
 
@@ -51,7 +51,7 @@ export async function main(
       }
     )
     .catch(err => {
-      iotLogger.info(
+      logger.info(
         `Error: ${JSON.stringify(err, Object.getOwnPropertyNames(err))}`
       );
 
