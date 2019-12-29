@@ -14,7 +14,8 @@ const debug = Debug('iot-user-provisioner:handlers');
 
 export function registerRoutes(
   app: Application,
-  iotLogger: IoTLogger) {
+  iotLogger: IoTLogger,
+) {
   debug('Registering routes...');
 
   const userRepository = RepositoryFactory.getRepository(RepositoryType.User) as UserRepository;
@@ -22,12 +23,12 @@ export function registerRoutes(
 
   const registerToEngineMap = new Map([
     [userRoutesRegister, userEngine],
-    [organizationsRoutesRegister, userEngine], //TODO: only for marking territory, must be changed later..
+    [organizationsRoutesRegister, userEngine], // TODO: only for marking territory, must be changed later..
   ]);
 
   const registerToValidatorMap = new Map([
     [userRoutesRegister, userEngine],
-    [organizationsRoutesRegister, userEngine], //TODO: only for marking territory, must be changed later..
+    [organizationsRoutesRegister, userEngine], // TODO: only for marking territory, must be changed later..
   ]);
 
 

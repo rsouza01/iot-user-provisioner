@@ -20,7 +20,7 @@ const iotLogger = defaultLogger.getIoTDefaultLogger(
   process.env.APP_NAME,
   process.env.APP_VERSION,
   process.env.APP_LOG_FILE,
-  );
+);
 
 middleware.registerMiddleware(app);
 handlers.registerRoutes(app, iotLogger);

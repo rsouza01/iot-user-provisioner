@@ -20,7 +20,6 @@ export default class UserEngine implements Engine {
   }
 
   public async create(req: Request, userRepository: UserRepository, validator: Function): Promise<any> {
-
     const validationResults = validator(req);
 
     if (validationResults instanceof ValidationError) {
