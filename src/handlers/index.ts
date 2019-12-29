@@ -25,6 +25,11 @@ export function registerRoutes(
     [organizationsRoutesRegister, userEngine], //TODO: only for marking territory, must be changed later..
   ]);
 
+  const registerToValidatorMap = new Map([
+    [userRoutesRegister, userEngine],
+    [organizationsRoutesRegister, userEngine], //TODO: only for marking territory, must be changed later..
+  ]);
+
 
   userRoutesRegister.registerRoutes(app, userRepository, userEngine, iotLogger);
   organizationsRoutesRegister.registerRoutes(app, userRepository, userEngine, iotLogger);

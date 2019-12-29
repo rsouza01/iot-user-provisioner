@@ -8,7 +8,6 @@ import User from '../domain/user';
 import { UserRepository } from '../repository/repository';
 import ValidationError from '../validators/errors/validation-error';
 
-import validate from '../validators/users/create';
 import Engine from './engine';
 
 const debug = Debug('iot-user-provisioner:UserEngine');
@@ -20,11 +19,9 @@ export default class UserEngine implements Engine {
     this.iotLogger = iotLogger;
   }
 
-  public async create(req: Request, userRepository: UserRepository): Promise<any> {
+  public async create(req: Request, userRepository: UserRepository, validator: Function): Promise<any> {
 
-    console.log('>>>>>>>>> UserEngine.create');
-
-    const validationResults = validate(req);
+    const validationResults = validator(req);
 
     if (validationResults instanceof ValidationError) {
       return Promise.reject(validationResults);

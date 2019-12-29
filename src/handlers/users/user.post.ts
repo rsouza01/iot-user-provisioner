@@ -10,9 +10,9 @@ import User from "../../domain/user";
 import { UserRepository } from "../../repository/repository";
 
 import ValidationError from "../../validators/errors/validation-error";
-import validate from "../../validators/users/create";
 import UserEngine from "../../engines/user";
 import Engine from "../../engines/engine";
+
 
 const debug = Debug("iot-user-provisioner:user.post");
 
@@ -22,12 +22,13 @@ export async function main(
   repository: UserRepository,
   engine: Engine,
   logger: IoTLogger,
+  validator: Function,
   ValidationError
 ) {
   const userEngine = engine as UserEngine;
 
   return userEngine
-    .create(req, repository)
+    .create(req, repository, validator)
     .then(
       (result) => {
         logger.info(
