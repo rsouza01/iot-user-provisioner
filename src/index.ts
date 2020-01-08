@@ -1,5 +1,4 @@
 import express from 'express';
-
 import Debug from 'debug';
 
 import * as defaultLogger from '@iot-stuff/iot-logger';
@@ -26,6 +25,19 @@ middleware.registerMiddleware(app);
 handlers.registerRoutes(app, iotLogger);
 
 app.use(errorHandler);
+
+
+// app.shutdown = function () {
+//   // clean up your resources and exit
+//   process.exit();
+// };
+// process.on('SIGINT', function onSigint() {
+//   app.shutdown();
+// });
+// process.on('SIGTERM', function onSigterm() {
+//   app.shutdown();
+// });
+
 
 if (require.main === module) {
   app.listen(PORT, () => {

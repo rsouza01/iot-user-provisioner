@@ -10,6 +10,7 @@
     "start": "dotenv -e .env npm run build:prod; dotenv -e .env node ./build/index.js",
     "clean": "npx rimraf ./node_modules ./build ./.nyc_output *.log",
     "build:prod": "npm clean; npm i; tsc",
+    "build:container": "docker build --build-arg NPM_TOKEN=${NPM_TOKEN} -t iot-stuff/iot-user-provisioner -f ./scripts/Dockerfile .",
     "test": "npm run tests:unit; npm run tests:e2e_container",
     "tests:unit": "npx mocha --recursive -r ts-node/register ./test/**/*.unit.ts",
     "tests:e2econfig": "cucumber-js -p default",
