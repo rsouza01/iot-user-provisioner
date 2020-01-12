@@ -19,7 +19,7 @@ export default class UserEngine implements Engine {
     this.iotLogger = iotLogger;
   }
 
-  public async create(req: Request, userRepository: UserRepository, validator: Function): Promise<any> {
+  public async create(req: Request, userRepository: UserRepository, validator: Function, ValidationError): Promise<any> {
     const validationResults = validator(req);
 
     if (validationResults instanceof ValidationError) {

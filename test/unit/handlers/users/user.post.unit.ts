@@ -29,7 +29,7 @@ function generateResMock(sandbox) {
   };
 }
 
-describe.only("User - POST Handler", () => {
+describe("User - POST Handler", () => {
 
   const sandbox = sinon.createSandbox();
 
@@ -53,7 +53,7 @@ describe.only("User - POST Handler", () => {
     }
 
     beforeEach(function () {
-      return userPost.main(req, res, repository, engine, logger, ValidationError);
+      return userPost.main(req, res, repository, engine, logger, validator, ValidationError);
     });
 
     afterEach(function () {
@@ -71,7 +71,7 @@ describe.only("User - POST Handler", () => {
     }
 
     beforeEach(function () {
-      return userPost.main(req, res, repository, engine, logger, ValidationError);
+      return userPost.main(req, res, repository, engine, logger, validator, ValidationError);
     });
 
     afterEach(function () {

@@ -27,10 +27,12 @@ export function registerRoutes(
   */
 
   debug('Registering user.POST...');
-  app.route('/user').post(injectHandlerDependencies(
-    userPost.main,
-    userRepository, engine,
-    iotLogger,
-    validate, ValidationError,
-  ));
+  app.route('/user').post(
+    injectHandlerDependencies(
+      userPost.main,
+      userRepository,
+      engine,
+      iotLogger,
+      validate, ValidationError,
+    ));
 }

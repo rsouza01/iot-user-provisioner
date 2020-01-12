@@ -28,7 +28,7 @@ export async function main(
   const userEngine = engine as UserEngine;
 
   return userEngine
-    .create(req, repository, validator)
+    .create(req, repository, validator, ValidationError)
     .then(
       (result) => {
         logger.info(
