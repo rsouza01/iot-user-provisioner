@@ -48,7 +48,7 @@ export async function main(
           res.set('Content-Type', 'application/json');
           return res.json({ message: err.message });
         }
-        return undefined;
+        throw err;
       },
     )
     .catch((err) => {

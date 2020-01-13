@@ -17,7 +17,8 @@
     "tests:e2e-container": "dotenv -e .env ./scripts/e2e.test.sh",
     "tests:e2e": "npx dotenv -e .env cucumber-js -- test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts",
     "tests:e2eonly": "npx dotenv -e .env cucumber-js -- test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts  --name '@only'",
-    "tests:coverage": "dotenv -e .env nyc --reporter=html npm run tests:unit"
+    "tests:unit:coverage": "dotenv -e .env nyc --reporter=html npm run tests:unit",
+    "tests:e2e:coverage": "dotenv -e .env nyc --reporter=html npm run tests:e2e"
   },
   "keywords": [],
   "author": "",

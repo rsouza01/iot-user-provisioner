@@ -1,5 +1,6 @@
 import assert from 'assert';
 import { stub } from 'sinon';
+import { v4 as uuid } from 'uuid';
 import * as sinon from 'sinon';
 import ValidationError from "../../../src/validators/errors/validation-error";
 import UserEngine from "../../../src/engines/user";
@@ -12,10 +13,14 @@ describe('User Create Engine', function () {
   let req;
   let db;
   let validator;
-  const dbInsertResult = {};
+  const dbInsertResult = {
+    _id: uuid(),
+    email: 'req.body.email',
+    password: 'req.body.password',
+  } as User;
 
-  const repository: UserRepository = new NullRepository();
-  sinon.stub(repository, 'insert') .returns(Promise.resolve(dbInsertResult));
+
+  let repository: UserRepository;
 
   const logger = {
     info: () => console.log()
@@ -24,15 +29,19 @@ describe('User Create Engine', function () {
   let userEngine = new UserEngine(undefined, logger);
 
   beforeEach(function () {
+
+    repository = new NullRepository();
+    sinon.stub(repository, 'insert').returns(Promise.resolve(dbInsertResult));
+
     req = {
       body: {
         email: 'req.body.email',
         password: 'req.body.password',
-        }
+      }
     };
   });
 
-  describe.only('When invoked and validator returns with undefined', function () {
+  describe('When invoked and validator returns with undefined', function () {
     let promise;
 
     beforeEach(function () {
@@ -55,7 +64,8 @@ describe('User Create Engine', function () {
     it('should relay the promise returned by UserRepository.insert()', function () {
 
       promise.then(res => {
-        assert.strictEqual(res, dbInsertResult)
+        assert.equal(res.email, dbInsertResult.email);
+        assert.equal(res.password, dbInsertResult.password);
       });
     });
   });
