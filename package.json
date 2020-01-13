@@ -13,6 +13,7 @@
     "build:container": "docker build --build-arg NPM_TOKEN=${NPM_TOKEN} -t iot-stuff/iot-user-provisioner -f ./scripts/Dockerfile .",
     "test": "npm run tests:unit; npm run tests:e2e-container",
     "tests:unit": "npx mocha --recursive -r ts-node/register ./test/**/*.unit.ts",
+    "tests:integration": "npx mocha --recursive -r ts-node/register ./test/**/*.integration.ts",
     "tests:e2econfig": "cucumber-js -p default",
     "tests:e2e-container": "dotenv -e .env ./scripts/e2e.test.sh",
     "tests:e2e": "npx dotenv -e .env cucumber-js -- test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts",

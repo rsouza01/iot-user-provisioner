@@ -34,5 +34,6 @@ export function registerRoutes(
       engine,
       iotLogger,
       validate, ValidationError,
-    ));
+    ),
+  );
 }
