@@ -52,6 +52,10 @@ OPTIONS:
 
   -h, --help        Show this help screen and exits
   -V, --version     Show program version and exits
+
+EXAMPLE:
+    Encrypting: $(basename "$0") -f <filename> -e -k <KEY-VALUE>
+    Decrypting: $(basename "$0") -f <filename> -d -k <KEY-VALUE>
 "
 
 
@@ -120,6 +124,7 @@ done
 if [[ "$_KEY" = "" ]]
 then    
     printlncolorERROR "No key set. Exiting..."
+	echo "$USE_MESSAGE"
     exit -1
 fi
 
