@@ -20,6 +20,15 @@ npm install
 
 ## Usage
 
+In order to start using the application, the secrets should be decrypted, running the following command:
+
+```sh
+npm run secrets:decrypt
+```
+
+Then
+
+
 ```sh
 npm run start
 ```
