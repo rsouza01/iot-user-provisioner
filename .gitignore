@@ -64,3 +64,5 @@ typings/
 
 #mongo
 .mongo/
+
+**/*.decrypted
