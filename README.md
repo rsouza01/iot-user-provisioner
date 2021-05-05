@@ -29,8 +29,12 @@ npm run start
 ```sh
 npm run tests:unit
 npm run tests:integration
+```
 
+For a full end to end test, 
 
+```sh
+npm run tests:e2e-container
 ```
 
 ## Author
