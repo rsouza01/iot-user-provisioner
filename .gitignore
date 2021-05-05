@@ -62,7 +62,9 @@ typings/
 .next
 
 
-#mongo
+# mongo
 .mongo/
 
+# Secrets
+**/.npmrc
 **/*.decrypted
