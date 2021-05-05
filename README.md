@@ -6,6 +6,12 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=IoT-Stuff_iot-user-provisioner&metric=alert_status)](https://sonarcloud.io/dashboard?id=IoT-Stuff_iot-user-provisioner)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FIoT-Stuff%2Fiot-user-provisioner.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FIoT-Stuff%2Fiot-user-provisioner?ref=badge_shield)
 
+## OS Dependencies
+
+```sh
+sudo apt-get install netcat
+```
+
 ## Install
 
 ```sh
@@ -16,6 +22,19 @@ npm install
 
 ```sh
 npm run start
+```
+
+## Tests
+
+```sh
+npm run tests:unit
+npm run tests:integration
+```
+
+For a full end to end test, 
+
+```sh
+npm run tests:e2e-container
 ```
 
 ## Author
