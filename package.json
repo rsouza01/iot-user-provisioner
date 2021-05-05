@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "secrets:decrypt": "./bin/env-secrets.sh",
     "eslint:run": "eslint src",
     "eslint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
     "start:dev": "DEBUG=iot-user-provisioner* dotenv -e .env nodemon",
