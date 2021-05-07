@@ -2,6 +2,7 @@
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+[![Github Action - Tests](https://github.com/IoT-Stuff/iot-user-provisioner/actions/workflows/pipeline.yml/badge.svg)](https://github.com/IoT-Stuff/iot-user-provisioner/actions/workflows/pipeline.yml)
 [![Build Status](https://travis-ci.com/IoT-Stuff/iot-user-provisioner.svg?branch=master)](https://travis-ci.com/IoT-Stuff/iot-user-provisioner)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=IoT-Stuff_iot-user-provisioner&metric=alert_status)](https://sonarcloud.io/dashboard?id=IoT-Stuff_iot-user-provisioner)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FIoT-Stuff%2Fiot-user-provisioner.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FIoT-Stuff%2Fiot-user-provisioner?ref=badge_shield)
