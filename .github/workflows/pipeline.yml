@@ -39,6 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
     - uses: actions/checkout@v2
 
