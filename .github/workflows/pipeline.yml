@@ -57,15 +57,22 @@ jobs:
     - name: 'Build Stage'
       run: npm run build:prod
 
-    # - name: 'Image build'
-    #   run: npm run build:container
+    - name: 'Image build'
+      run: npm run build:container
 
-    - name: Push to GitHub Packages
-      uses: docker/build-push-action@v1
-      with:
-        dockerfile: ./scripts/Dockerfile
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        registry: docker.pkg.github.com
-        repository: iot-stuff/iot-user-provisioner/iot-user-provisioner
-        tag_with_ref: true
+    - name: 'Push to GitHub Packages'
+      run: | 
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin && \
+        docker push iot-stuff/iot-user-provisioner/iot-user-provisioner:latest
+
+        # - name: Push to GitHub Packages
+    #   uses: docker/build-push-action@v1
+    #   with:
+    #     dockerfile: ./scripts/Dockerfile
+    #     username: ${{ github.actor }}
+    #     password: ${{ secrets.GITHUB_TOKEN }}
+    #     registry: docker.pkg.github.com
+    #     repository: iot-stuff/iot-user-provisioner/iot-user-provisioner
+    #     tag_with_ref: true
+
+
