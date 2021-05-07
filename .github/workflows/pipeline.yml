@@ -20,11 +20,12 @@ jobs:
     - name: Decrypt secrets
       run: npm run secrets:decrypt
 
-
     - name: Install dependencies
       run: npm i
+
     - name: Unit test
       run: npm run test:unit
+      
     - name: Code coverage
-      run: npm run test:coverage
+      run: npm run test:unit:coverage
 
