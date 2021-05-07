@@ -34,7 +34,7 @@ jobs:
     - name: End to End Tests
       run: npm run test:e2e-container
 
-  Build:
+  Image Build:
     runs-on: ubuntu-latest
     env:
       ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
