@@ -35,6 +35,7 @@ jobs:
       run: npm run test:e2e-container
 
   Image-Build:
+    needs: Tests
     runs-on: ubuntu-latest
     env:
       ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
