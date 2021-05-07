@@ -9,6 +9,7 @@
 
 #FUNCTIONS DEFINITIONS
 
+
 print2stringslncolor () {
         echo -e "\e[0m$1\e[1;34m$2\e[0m\n"
 }
