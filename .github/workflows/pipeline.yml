@@ -57,12 +57,13 @@ jobs:
     - name: 'Build Stage'
       run: npm run build:prod
 
-    - name: 'Image build'
-      run: npm run build:container
+    # - name: 'Image build'
+    #   run: npm run build:container
 
     - name: Push to GitHub Packages
       uses: docker/build-push-action@v1
       with:
+        file: ./scripts/Dockerfile
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
