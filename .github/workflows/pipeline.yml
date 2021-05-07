@@ -7,16 +7,18 @@ on:
     branches: [ master ]
 
 jobs:
-  tests:
+  Tests:
     runs-on: ubuntu-latest
     env:
       ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Node 14
       uses: actions/setup-node@v2
       with:
         node-version: '14'
+
     - name: Decrypt secrets
       run: npm run secrets:decrypt
 
@@ -31,3 +33,26 @@ jobs:
 
     - name: End to End Tests
       run: npm run test:e2e-container
+
+  Build:
+    runs-on: ubuntu-latest
+    env:
+      ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node 14
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Decrypt secrets
+      run: npm run secrets:decrypt
+
+    - name: Install dependencies
+      run: npm i
+
+    - name: 'Build Stage'
+      run: npm run build:prod
+
+
