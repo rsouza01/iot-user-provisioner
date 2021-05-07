@@ -59,3 +59,12 @@ jobs:
 
     - name: 'Image build'
       run: npm run build:container
+
+    - name: Push to GitHub Packages
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: iot-stuff/iot-user-provisioner/iot-user-provisioner:latest
+        tag_with_ref: true
