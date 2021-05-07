@@ -37,7 +37,10 @@ done
 echo "Connected to Mongo local server in $COUNTER seconds so far."
 
 # Start the server (production-mode) in background
-echo -ne "Starting the server production-mode in background..." 
+echo -ne "Building the application in production-mode..." 
+npm run build:prod
+
+echo -ne "Starting the server in background..." 
 npm run start > /dev/null 2>&1 &  
 
 # Test if the server is up and running
