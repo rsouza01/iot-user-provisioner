@@ -25,7 +25,9 @@ jobs:
 
     - name: Unit test
       run: npm run test:unit
-      
+
     - name: Code coverage
       run: npm run test:unit:coverage
 
+    - name: End to End Tests
+      run: npm run tests:e2e-container
