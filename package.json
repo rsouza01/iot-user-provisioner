@@ -7,7 +7,8 @@
   "homepage": "https://github.com/IoT-Stuff/iot-user-provisioner",
   "bugs": {
     "url": "https://github.com/IoT-Stuff/iot-user-provisioner/issues"
-  },  "license": "MIT",
+  },
+  "license": "MIT",
   "keywords": [
     "IoT",
     "microservice"
@@ -15,7 +16,7 @@
   "repository": {
     "type": "git",
     "url": "git+ssh://github.com/IoT-Stuff/iot-user-provisioner"
-  },  
+  },
   "scripts": {
     "secrets:decrypt": "./bin/env-secrets.sh",
     "eslint:run": "eslint src",
