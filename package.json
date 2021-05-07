@@ -1,8 +1,21 @@
 {
   "name": "iot-user-provisioner",
+  "author": "Rodrigo de Souza <rsouza01@gmail.com>",
   "version": "1.0.0",
-  "description": "",
+  "description": "Small microservice for authentication and user management",
   "main": "index.js",
+  "homepage": "https://github.com/IoT-Stuff/iot-user-provisioner",
+  "bugs": {
+    "url": "https://github.com/IoT-Stuff/iot-user-provisioner/issues"
+  },  "license": "MIT",
+  "keywords": [
+    "IoT",
+    "microservice"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://github.com/IoT-Stuff/iot-user-provisioner"
+  },  
   "scripts": {
     "secrets:decrypt": "./bin/env-secrets.sh",
     "eslint:run": "eslint src",
@@ -12,6 +25,7 @@
     "clean": "npx rimraf ./node_modules ./build ./.nyc_output *.log",
     "build:prod": "npm run clean; npm i; npx tsc",
     "build:container": "docker build --build-arg NPM_TOKEN=${NPM_TOKEN} -t iot-stuff/iot-user-provisioner -f ./scripts/Dockerfile .",
+    "image:build": "docker build --build-arg NPM_TOKEN=${NPM_TOKEN} -t iot-stuff/iot-user-provisioner -f ./scripts/Dockerfile .",
     "test": "npm run test:unit; npm run test:integration; npm run test:e2e-container",
     "test:unit": "npx mocha --recursive -r ts-node/register ./test/**/*.unit.ts",
     "test:integration": "npx mocha --recursive -r ts-node/register ./test/**/*.integration.ts",
@@ -22,9 +36,6 @@
     "test:unit:coverage": "dotenv -e .env nyc --reporter=html npm run test:unit",
     "test:e2e:coverage": "dotenv -e .env nyc --reporter=html npm run test:e2e"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.2.17",
     "@types/cors": "^2.8.10",
