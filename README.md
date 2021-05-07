@@ -14,19 +14,15 @@ sudo apt-get install netcat
 
 ## Install
 
+In order to start using the application, the secrets should be decrypted, running the following command (after exporting ENCRYPTION_KEY):
+
 ```sh
+export ENCRYPTION_KEY=<key-value>
+npm run secrets:decrypt
 npm install
 ```
 
 ## Usage
-
-In order to start using the application, the secrets should be decrypted, running the following command:
-
-```sh
-npm run secrets:decrypt
-```
-
-Then
 
 
 ```sh
