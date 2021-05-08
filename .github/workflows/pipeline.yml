@@ -93,4 +93,3 @@ jobs:
           repository: iot-stuff/iot-user-provisioner
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_TOKEN }} 
-          dockerfile: ./scripts/Dockerfile
