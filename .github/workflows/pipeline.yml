@@ -70,4 +70,3 @@ jobs:
       run: |
         npm run build:container
         docker push ghcr.io/iot-stuff/iot-user-provisioner
-        docker push ghcr.io/iot-stuff/iot-user-provisioner:$SHA12
