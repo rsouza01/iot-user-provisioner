@@ -82,8 +82,6 @@ jobs:
       #   repository: iot-stuff/iot-user-provisioner/iot-user-provisioner
       #   tag_with_ref: true
       #   githubOrg: iot-stuff
-
-        
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
           dockerfile: ./scripts/Dockerfile
