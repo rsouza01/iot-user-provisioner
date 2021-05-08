@@ -7,35 +7,35 @@ on:
     branches: [ master ]
 
 jobs:
-  Tests:
-    runs-on: ubuntu-latest
-    env:
-      ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
-    steps:
-    - uses: actions/checkout@v2
+  # Tests:
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+  #   steps:
+  #   - uses: actions/checkout@v2
 
-    - name: Set up Node 14
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+  #   - name: Set up Node 14
+  #     uses: actions/setup-node@v2
+  #     with:
+  #       node-version: '14'
 
-    - name: Decrypt secrets
-      run: npm run secrets:decrypt
+  #   - name: Decrypt secrets
+  #     run: npm run secrets:decrypt
 
-    - name: Install dependencies
-      run: npm i
+  #   - name: Install dependencies
+  #     run: npm i
 
-    - name: Unit test
-      run: npm run test:unit
+  #   - name: Unit test
+  #     run: npm run test:unit
 
-    - name: Code coverage
-      run: npm run test:unit:coverage
+  #   - name: Code coverage
+  #     run: npm run test:unit:coverage
 
-    - name: End to End Tests
-      run: npm run test:e2e-container
+  #   - name: End to End Tests
+  #     run: npm run test:e2e-container
 
   Image-Build:
-    needs: Tests
+    # needs: Tests
     runs-on: ubuntu-latest
     env:
       ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
@@ -75,6 +75,7 @@ jobs:
     - name: Push to GitHub Packages
       uses: docker/build-push-action@v1
       with:
+        dockerfile: ./scripts/Dockerfile
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
