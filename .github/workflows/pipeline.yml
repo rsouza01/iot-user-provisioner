@@ -57,37 +57,17 @@ jobs:
     - name: 'Build Stage'
       run: npm run build:prod
 
-    # - name: 'Image build'
-    #   run: npm run build:container
+    - name: 'Image build'
+      run: npm run build:container
 
-    # - name: Login to GitHub Container Registry
-    #   uses: docker/login-action@v1
-    #   with:
-    #     registry: ghcr.io
-    #     username: ${{ github.actor }}
-    #     password: ${{ secrets.GITHUB_TOKEN }}
-
-    # - name: 'Push to GitHub Packages'
-    #   run: |
-    #     npm run build:container
-    #     docker push iot-stuff/iot-user-provisioner/iot-user-provisioner
-
-    - name: Push to GitHub Packages
-      # uses: docker/build-push-action@v1
-      # with:
-      #   dockerfile: ./scripts/Dockerfile
-      #   username: ${{ github.actor }}
-      #   password: ${{ secrets.GITHUB_TOKEN }}
-      #   registry: docker.pkg.github.com
-      #   repository: iot-stuff/iot-user-provisioner/iot-user-provisioner
-      #   tag_with_ref: true
-      #   githubOrg: iot-stuff
-      uses: mr-smithers-excellent/docker-build-push@v5
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
       with:
-        dockerfile: ./scripts/Dockerfile
-        image: ghcr.io/iot-stuff/iot-user-provisioner
         registry: ghcr.io
-        githubOrg: iot-stuff
-        repository: iot-stuff/iot-user-provisioner
+        # username: ${{ github.actor }}
+        # password: ${{ secrets.GITHUB_TOKEN }}
         username: ${{ secrets.GHCR_USERNAME }}
         password: ${{ secrets.GHCR_TOKEN }} 
+
+    - name: 'Push to GitHub Packages'
+      run: docker push ghcr.io/iot-stuff/iot-user-provisioner
