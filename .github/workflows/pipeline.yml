@@ -84,13 +84,13 @@ jobs:
       #   githubOrg: iot-stuff
 
         
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        dockerfile: ./scripts/Dockerfile
-        image: ghcr.io/iot-stuff/iot-user-provisioner
-        registry: ghcr.io
-        githubOrg: iot-stuff
-        repository: iot-stuff/iot-user-provisioner
-        username: ${{ secrets.GHCR_USERNAME }}
-        password: ${{ secrets.GHCR_TOKEN }} 
-        dockerfile: ./scripts/Dockerfile
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          dockerfile: ./scripts/Dockerfile
+          image: ghcr.io/iot-stuff/iot-user-provisioner
+          registry: ghcr.io
+          githubOrg: iot-stuff
+          repository: iot-stuff/iot-user-provisioner
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }} 
+          dockerfile: ./scripts/Dockerfile
