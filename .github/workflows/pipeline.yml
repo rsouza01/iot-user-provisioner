@@ -40,6 +40,8 @@ jobs:
     env:
       ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      SHA12: ${GITHUB_SHA::12}
+
     steps:
     - uses: actions/checkout@v2
 
@@ -68,4 +70,4 @@ jobs:
       run: |
         npm run build:container
         docker push ghcr.io/iot-stuff/iot-user-provisioner
-        docker push ghcr.io/iot-stuff/iot-user-provisioner:${{ github.GITHUB_SHA:8 }}
+        docker push ghcr.io/iot-stuff/iot-user-provisioner:$SHA12
