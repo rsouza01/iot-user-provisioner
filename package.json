@@ -25,7 +25,7 @@
     "start": "npx dotenv -e .env npm run build:prod; npx dotenv -e .env node ./dist/index.js",
     "clean": "npx rimraf ./node_modules ./dist ./.nyc_output *.log",
     "build:prod": "npm run clean; npm i; npx tsc",
-    "build:container": "docker build --build-arg NPM_TOKEN=${NPM_TOKEN} -t iot-stuff/iot-user-provisioner -f ./scripts/Dockerfile .",
+    "build:container": "docker build --build-arg NPM_TOKEN=${NPM_TOKEN} -t ghcr.io/iot-stuff/iot-user-provisioner -f ./scripts/Dockerfile .",
     "test": "npm run test:unit; npm run test:integration; npm run test:e2e-container",
     "test:unit": "npx mocha --recursive -r ts-node/register ./test/**/*.unit.ts",
     "test:integration": "npx mocha --recursive -r ts-node/register ./test/**/*.integration.ts",
