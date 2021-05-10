@@ -54,9 +54,11 @@ until ss -lnt | grep -q :$SERVER_PORT; do
 done
 echo "done."
 
+EXIT_CODE=0
 # Run the End-to-End tests
 echo "Starting end to end tests (it may take a while)..." 
 npx dotenv -e .env cucumber-js -- ./test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts
+EXIT_CODE=$?
 
 # Tear down
 echo -ne "Destroying docker-compose stack..." 
@@ -71,4 +73,4 @@ echo "done."
 
 #Finishing
 echo "Exiting..."
-exit 0
+exit $EXIT_CODE
