@@ -43,6 +43,10 @@ npm run build:prod
 echo -ne "Starting the server in background..." 
 npm run start > /dev/null 2>&1 &  
 
+# echo -ne "Build and spin up docker image..." 
+# npm run build:container
+# npm run start:container
+
 # Test if the server is up and running
 RETRY_INTERVAL=0.2 
 until ss -lnt | grep -q :$SERVER_PORT; do 
