@@ -12,7 +12,8 @@ jobs:
     env:
       ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
     steps:
-    - uses: actions/checkout@v2
+    - name: Check out code
+      uses: actions/checkout@v2
 
     - name: Set up Node 14
       uses: actions/setup-node@v2
@@ -43,7 +44,8 @@ jobs:
       SHA12: ${GITHUB_SHA::12}
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Check out code
+      uses: actions/checkout@v2
 
     - name: Set up Node 14
       uses: actions/setup-node@v2

@@ -81,7 +81,6 @@ Feature: Create User
       | {"email":"e@ma.il","password":"abc","profile":{"summary":0}}                      | The '.profile.summary' field must be of type string       |
       | {"email":"e@ma.il","password":"abc","profile":{"bio":0}}                          | The '.profile.bio' field must be of type string           |
 
-
   Scenario Outline:
     Valid Profile
     When the client creates a POST request to /user/
